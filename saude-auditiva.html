@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saúde Auditiva — Informação e Recursos para a sua Audição</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #141414; --ink-mid: #3a3a3a; --ink-light: #6b6b6b; --ink-faint: #9e9e9e;
+  --rule: #d4d0c8; --rule-light: #e8e5de; --paper: #f9f7f3; --paper-dark: #f0ede6;
+  --accent: #1a5c3a; --accent-mid: #236b46; --accent-light: #e8f3ec;
+  --red: #c0392b; --serif: 'Libre Baskerville', Georgia, serif; --sans: 'Libre Franklin', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+
+/* MASTHEAD */
+.masthead { border-bottom: 3px solid var(--ink); padding: 0 24px; background: var(--paper); position: sticky; top: 0; z-index: 50; }
+.masthead-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 0 8px; border-bottom: 1px solid var(--rule); }
+.site-date { font-size: 0.72rem; color: var(--ink-light); letter-spacing: 0.06em; text-transform: uppercase; }
+.site-name { font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); cursor: pointer; }
+.site-name em { font-style: italic; color: var(--accent); }
+.site-tagline { font-size: 0.7rem; color: var(--ink-light); letter-spacing: 0.06em; text-transform: uppercase; text-align: right; max-width: 160px; line-height: 1.4; }
+.masthead-nav { display: flex; gap: 0; padding: 7px 0; overflow-x: auto; }
+.masthead-nav a { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-mid); padding: 3px 14px 3px 0; border-right: 1px solid var(--rule); margin-right: 14px; white-space: nowrap; cursor: pointer; transition: color 0.15s; }
+.masthead-nav a:last-child { border-right: none; }
+.masthead-nav a:hover, .masthead-nav a.active { color: var(--accent); }
+
+/* BREAKING BAR */
+.breaking-bar { background: var(--accent); color: white; padding: 8px 24px; display: flex; align-items: center; gap: 14px; font-size: 0.82rem; }
+.breaking-label { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.7rem; background: white; color: var(--accent); padding: 3px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+.breaking-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.breaking-cta { color: rgba(255,255,255,0.85); font-weight: 700; text-decoration: underline; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
+
+/* MAIN */
+.main-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.page { display: none; }
+.page.active { display: block; }
+
+/* STATS ROW */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); color: white; }
+.stat-cell { padding: 22px 18px; border-right: 1px solid rgba(255,255,255,0.1); text-align: center; }
+.stat-cell:last-child { border-right: none; }
+.stat-cell .big-num { font-family: var(--serif); font-size: 1.9rem; font-weight: 700; display: block; line-height: 1; margin-bottom: 4px; }
+.stat-cell .big-num em { font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.5); }
+.stat-cell p { font-size: 0.73rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+/* LEAD SECTION */
+.lead-section { display: grid; grid-template-columns: 1fr 340px; border-bottom: 2px solid var(--ink); padding: 28px 0; }
+.lead-article { padding-right: 28px; border-right: 1px solid var(--rule); }
+.lead-kicker { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.lead-kicker::after { content: ''; flex: 1; height: 1px; background: var(--accent); max-width: 36px; }
+.lead-headline { font-family: var(--serif); font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
+.lead-byline { display: flex; align-items: center; gap: 10px; font-size: 0.76rem; color: var(--ink-light); margin-bottom: 14px; flex-wrap: wrap; }
+.byline-source { font-weight: 700; color: var(--accent); }
+.byline-updated { display: flex; align-items: center; gap: 5px; }
+.byline-updated::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+.lead-deck { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink-mid); line-height: 1.6; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--rule-light); }
+.lead-body { font-size: 0.92rem; color: var(--ink-mid); line-height: 1.75; column-count: 2; column-gap: 22px; }
+.lead-body p { break-inside: avoid; margin-bottom: 10px; }
+.stat-block { background: var(--paper-dark); border-left: 4px solid var(--accent); padding: 14px 16px; margin: 0 0 14px; column-span: all; }
+.stat-block .number { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--accent); display: block; line-height: 1; }
+.stat-block .label { font-size: 0.8rem; color: var(--ink-mid); line-height: 1.4; }
+.read-more-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-top: 14px; cursor: pointer; background: none; border: none; font-family: var(--sans); padding: 0; }
+.read-more-btn::after { content: '→'; }
+
+/* SIDEBAR */
+.lead-sidebar { padding-left: 24px; }
+.sidebar-title { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.cta-card { background: var(--ink); color: white; padding: 20px 16px; border-radius: 2px; margin-bottom: 18px; }
+.cta-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 7px; }
+.cta-card h3 { font-family: var(--serif); font-size: 1.05rem; line-height: 1.25; margin-bottom: 7px; }
+.cta-card > p { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 12px; }
+.free-badge { display: inline-block; background: var(--accent); color: white; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-bottom: 10px; }
+.cta-form input { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 9px 11px; color: white; font-family: var(--sans); font-size: 0.84rem; margin-bottom: 7px; outline: none; }
+.cta-form input::placeholder { color: rgba(255,255,255,0.3); }
+.cta-form button { width: 100%; background: var(--accent); color: white; font-family: var(--sans); font-size: 0.82rem; font-weight: 700; border: none; border-radius: 3px; padding: 10px; cursor: pointer; transition: background 0.15s; }
+.cta-privacy { font-size: 0.64rem; color: rgba(255,255,255,0.28); text-align: center; margin-top: 7px; }
+.ty-state { display: none; text-align: center; padding: 8px 0; }
+.ty-state .ty-icon { font-size: 1.6rem; margin-bottom: 5px; }
+.ty-state p { font-size: 0.8rem; color: rgba(255,255,255,0.7) !important; }
+.quiz-card { background: var(--accent-light); border: 1px solid rgba(26,92,58,0.15); padding: 16px; border-radius: 2px; }
+.quiz-card .quiz-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.quiz-card h4 { font-family: var(--serif); font-size: 0.92rem; line-height: 1.3; margin-bottom: 10px; }
+.quiz-btn { background: var(--accent); color: white; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 13px; border-radius: 2px; cursor: pointer; border: none; font-family: var(--sans); }
+
+/* ARTICLES GRID */
+.articles-section { padding: 24px 0; border-bottom: 2px solid var(--ink); }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-bottom: 7px; border-bottom: 2px solid var(--ink); }
+.section-header h2 { font-family: var(--sans); font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.articles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.article-card { border-right: 1px solid var(--rule); padding-right: 20px; cursor: pointer; }
+.article-card:last-child { border-right: none; padding-right: 0; }
+.article-card:hover .card-headline { color: var(--accent); }
+.card-kicker { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.card-headline { font-family: var(--serif); font-size: 0.98rem; font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 7px; transition: color 0.15s; }
+.card-excerpt { font-size: 0.8rem; color: var(--ink-mid); line-height: 1.6; margin-bottom: 8px; }
+.card-meta { font-size: 0.68rem; color: var(--ink-faint); display: flex; align-items: center; gap: 5px; }
+.card-meta .dot { color: var(--rule); }
+.card-read-btn { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); cursor: pointer; background: none; border: none; font-family: var(--sans); padding: 0; display: inline-flex; align-items: center; gap: 4px; margin-top: 7px; }
+.card-read-btn::after { content: '→'; }
+
+/* CHECKLIST */
+.checklist-section { display: grid; grid-template-columns: 1fr 320px; gap: 36px; padding: 26px 0; border-bottom: 2px solid var(--ink); align-items: start; }
+.section-kicker { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.checklist-content h2 { font-family: var(--serif); font-size: 1.45rem; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+.checklist-content > p { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 16px; }
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.checklist li { display: flex; align-items: flex-start; gap: 11px; padding: 11px 13px; background: var(--paper-dark); border-radius: 2px; border-left: 3px solid transparent; transition: border-color 0.2s; }
+.checklist li:hover { border-left-color: var(--accent); }
+.check-icon { width: 20px; height: 20px; background: var(--rule-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 10px; color: var(--ink-light); border: 1px solid var(--rule); }
+.check-icon.yes { background: var(--accent-light); border-color: rgba(26,92,58,0.2); color: var(--accent); }
+.checklist li strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
+.checklist li span { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
+.info-box { background: var(--paper-dark); border: 1px solid var(--rule); padding: 20px; border-radius: 2px; }
+.info-box .box-title { font-family: var(--serif); font-size: 0.86rem; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+.info-box .box-title span { display: inline-block; background: var(--red); color: white; font-family: var(--sans); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; vertical-align: middle; margin-left: 5px; }
+.info-steps { list-style: none; counter-reset: steps; display: flex; flex-direction: column; gap: 11px; margin-bottom: 16px; }
+.info-steps li { counter-increment: steps; display: flex; gap: 10px; align-items: flex-start; font-size: 0.82rem; color: var(--ink-mid); line-height: 1.5; }
+.info-steps li::before { content: counter(steps); width: 20px; height: 20px; background: var(--ink); color: white; font-family: var(--serif); font-size: 0.7rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.info-btn { width: 100%; background: var(--ink); color: white; font-family: var(--sans); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border: none; padding: 11px; border-radius: 2px; cursor: pointer; transition: background 0.15s; }
+.info-btn:hover { background: var(--accent); }
+
+/* ARTICLE PAGE */
+.article-page { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.article-layout { display: grid; grid-template-columns: 1fr 300px; gap: 48px; padding: 28px 0; }
+.article-main { min-width: 0; }
+.article-breadcrumb { display: flex; align-items: center; gap: 7px; font-size: 0.7rem; color: var(--ink-faint); margin-bottom: 14px; flex-wrap: wrap; }
+.article-breadcrumb span { cursor: pointer; }
+.article-breadcrumb span:hover { color: var(--accent); }
+.article-breadcrumb .sep { color: var(--rule); }
+.article-kicker-line { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; display: flex; align-items: center; gap: 7px; }
+.article-kicker-line::after { content: ''; flex: 1; height: 1px; background: var(--accent); max-width: 32px; }
+.article-title { font-family: var(--serif); font-size: clamp(1.55rem, 3vw, 2.3rem); font-weight: 700; line-height: 1.15; margin-bottom: 13px; }
+.article-byline { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--ink-light); margin-bottom: 14px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+.article-deck { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--ink-mid); line-height: 1.65; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--rule-light); }
+.article-content { font-size: 0.94rem; color: var(--ink-mid); line-height: 1.8; }
+.article-content p { margin-bottom: 16px; }
+.article-content h3 { font-family: var(--serif); font-size: 1.18rem; font-weight: 700; color: var(--ink); margin: 26px 0 11px; }
+.article-content blockquote { border-left: 4px solid var(--accent); padding: 13px 17px; background: var(--paper-dark); margin: 22px 0; font-family: var(--serif); font-style: italic; font-size: 1.02rem; color: var(--ink-mid); }
+
+/* SKELETON */
+.skeleton { background: linear-gradient(90deg, var(--paper-dark) 25%, var(--rule-light) 50%, var(--paper-dark) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 3px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* INLINE CTA IN ARTICLE */
+.article-inline-cta { background: var(--ink); color: white; padding: 22px; border-radius: 2px; margin: 26px 0; }
+.article-inline-cta h4 { font-family: var(--serif); font-size: 1.08rem; margin-bottom: 5px; }
+.article-inline-cta > p { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 14px; line-height: 1.5; }
+.inline-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+.inline-row input { border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 9px 11px; color: white; font-family: var(--sans); font-size: 0.84rem; background: rgba(255,255,255,0.1); outline: none; }
+.inline-row input::placeholder { color: rgba(255,255,255,0.3); }
+.inline-row button { background: var(--accent); color: white; font-family: var(--sans); font-size: 0.8rem; font-weight: 700; border: none; border-radius: 3px; padding: 9px 14px; cursor: pointer; white-space: nowrap; }
+.inline-cta-ty { display: none; font-size: 0.86rem; font-weight: 600; color: #7dccaa; margin-top: 9px; }
+.inline-cta-priv { font-size: 0.66rem; color: rgba(255,255,255,0.28); margin-top: 7px; }
+
+/* ARTICLE SIDEBAR */
+.article-sidebar { padding-top: 28px; }
+.aside-cta { background: var(--ink); color: white; padding: 20px 16px; border-radius: 2px; margin-bottom: 20px; position: sticky; top: 90px; }
+.aside-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 7px; }
+.aside-cta h3 { font-family: var(--serif); font-size: 1rem; line-height: 1.3; margin-bottom: 7px; }
+.aside-cta > p { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.5; margin-bottom: 12px; }
+.aside-form input { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 3px; padding: 8px 10px; color: white; font-family: var(--sans); font-size: 0.82rem; margin-bottom: 6px; outline: none; }
+.aside-form input::placeholder { color: rgba(255,255,255,0.3); }
+.aside-form button { width: 100%; background: var(--accent); color: white; font-family: var(--sans); font-size: 0.8rem; font-weight: 700; border: none; border-radius: 3px; padding: 9px; cursor: pointer; }
+.aside-priv { font-size: 0.62rem; color: rgba(255,255,255,0.22); text-align: center; margin-top: 6px; }
+.aside-ty { display: none; text-align: center; font-size: 0.82rem; color: #7dccaa; font-weight: 600; padding: 4px 0; }
+.related-articles { margin-top: 0; }
+.related-title { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.related-item { padding: 10px 0; border-bottom: 1px solid var(--rule-light); cursor: pointer; }
+.related-item:last-child { border-bottom: none; }
+.related-item:hover .related-item-title { color: var(--accent); }
+.related-item-cat { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+.related-item-title { font-family: var(--serif); font-size: 0.86rem; line-height: 1.3; color: var(--ink); transition: color 0.15s; }
+
+/* BOOKING / QUIZ POPUP */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); }
+.overlay.open { display: flex; }
+.modal { background: var(--paper); max-width: 460px; width: 100%; border-radius: 4px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.3); animation: slideUp 0.3s ease; }
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.modal-header { background: var(--accent); color: white; padding: 18px 22px; display: flex; justify-content: space-between; align-items: flex-start; }
+.modal-header h3 { font-family: var(--serif); font-size: 1.08rem; line-height: 1.25; }
+.modal-header .sub { font-size: 0.7rem; font-weight: 400; opacity: 0.65; margin-top: 2px; }
+.modal-close { font-size: 1.1rem; cursor: pointer; color: rgba(255,255,255,0.6); flex-shrink: 0; margin-left: 12px; }
+.modal-body { padding: 24px 22px 20px; }
+.modal-field { margin-bottom: 12px; }
+.modal-field label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 4px; }
+.modal-field input, .modal-field select { width: 100%; border: 1.5px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: var(--sans); font-size: 0.88rem; color: var(--ink); background: var(--paper); outline: none; transition: border-color 0.2s; }
+.modal-field input:focus, .modal-field select:focus { border-color: var(--accent); }
+.modal-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+.modal-submit { width: 100%; background: var(--accent); color: white; font-family: var(--sans); font-size: 0.9rem; font-weight: 700; border: none; border-radius: 3px; padding: 12px; cursor: pointer; margin-top: 6px; }
+.modal-priv { font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 7px; }
+.modal-ty { display: none; text-align: center; padding: 8px 0 2px; }
+.modal-ty .ty-check { width: 52px; height: 52px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 20px; color: white; }
+.modal-ty h3 { font-family: var(--serif); font-size: 1.18rem; margin-bottom: 7px; }
+.modal-ty p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.6; margin-bottom: 14px; }
+.modal-ty-close { background: var(--paper-dark); border: 1px solid var(--rule); border-radius: 3px; padding: 8px 18px; font-family: var(--sans); font-size: 0.82rem; font-weight: 600; color: var(--ink-mid); cursor: pointer; }
+
+/* FOOTER */
+footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.footer-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.footer-sub { font-size: 0.74rem; color: var(--ink-light); line-height: 1.5; max-width: 230px; }
+.footer-links { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.footer-links a { font-size: 0.74rem; color: var(--ink-light); border-bottom: 1px solid var(--rule); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .lead-section,.checklist-section,.article-layout{grid-template-columns:1fr}
+  .lead-article{padding-right:0;border-right:none;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+  .lead-sidebar{padding-left:0;padding-top:20px}
+  .lead-body{column-count:1}
+  .articles-grid{grid-template-columns:1fr 1fr}
+  .article-card{border-right:none;padding-right:0;border-bottom:1px solid var(--rule);padding-bottom:14px}
+  .article-sidebar{display:none}
+  .inline-row{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .masthead-top{flex-direction:column;gap:6px;text-align:center}
+  .site-tagline{text-align:center;max-width:100%}
+}
+@media(max-width:600px){ .articles-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="main-container">
+    <div class="masthead-top">
+      <span class="site-date" id="siteDate"></span>
+      <div class="site-name" onclick="showPage('home')">Saúde <em>Auditiva</em></div>
+      <p class="site-tagline">Informação independente sobre audição e saúde</p>
+    </div>
+    <nav class="masthead-nav" id="mainNav">
+      <a onclick="showPage('home')" id="nav-home" class="active">Início</a>
+      <a onclick="showArticle(0)" id="nav-0">Perda Auditiva</a>
+      <a onclick="showArticle(1)" id="nav-1">Sinais de Alerta</a>
+      <a onclick="showArticle(2)" id="nav-2">Família</a>
+      <a onclick="showArticle(3)" id="nav-3">Diagnóstico</a>
+      <a onclick="showArticle(4)" id="nav-4">Prevenção</a>
+      <a onclick="openBooking()" style="color:var(--accent);font-weight:700">Consulta Gratuita</a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREAKING BAR -->
+<div class="breaking-bar">
+  <span class="breaking-label">Sabia que</span>
+  <span class="breaking-text">1 em cada 3 pessoas acima dos 65 anos tem algum grau de perda auditiva — e a maioria não sabe.</span>
+  <span class="breaking-cta" onclick="openBooking()">Agendar consulta gratuita →</span>
+</div>
+
+<!-- ======== HOME PAGE ======== -->
+<div id="page-home" class="page active">
+  <div class="main-container">
+
+    <div class="stats-row">
+      <div class="stat-cell"><span class="big-num">1<em> em 3</em></span><p>pessoas com +65 anos tem perda auditiva</p></div>
+      <div class="stat-cell"><span class="big-num">7<em> anos</em></span><p>tempo médio até pedir ajuda</p></div>
+      <div class="stat-cell"><span class="big-num">80<em>%</em></span><p>dos casos têm solução adequada</p></div>
+      <div class="stat-cell"><span class="big-num">0<em>€</em></span><p>consulta de avaliação auditiva</p></div>
+    </div>
+
+    <div class="lead-section">
+      <article class="lead-article">
+        <div class="lead-kicker">Saúde &amp; Bem-estar</div>
+        <h1 class="lead-headline">Porque ignoramos a perda auditiva durante anos — e o que isso nos custa</h1>
+        <div class="lead-byline">
+          <span class="byline-source">Saúde Auditiva</span>
+          <span style="color:var(--rule)">·</span>
+          <span class="byline-updated" id="homeDate">Última atualização: hoje</span>
+          <span style="color:var(--rule)">·</span>
+          <span>7 min de leitura</span>
+        </div>
+        <p class="lead-deck">Os especialistas chamam-lhe "a epidemia silenciosa". A perda auditiva afeta mais portugueses do que a diabetes, e ainda assim continuamos a tratar o assunto como um tabu.</p>
+        <div class="lead-body">
+          <p>Imaginem que começam a precisar de óculos mas, durante sete anos, ignoram o facto de que estão a ver cada vez menos. Parece absurdo. E no entanto, é exatamente isso que a maioria das pessoas faz com a audição.</p>
+          <p>Segundo dados internacionais citados pela OMS, a média de tempo entre os primeiros sinais de perda auditiva e a procura de tratamento é de sete anos. Em Portugal, estima-se que apenas uma em cada cinco pessoas com dificuldades auditivas usa algum tipo de compensação.</p>
+          <div class="stat-block"><span class="number">7</span><span class="label">anos em média entre os primeiros sintomas e o pedido de ajuda. A perda pode agravar-se significativamente neste período.</span></div>
+          <p>As razões são várias: negação, estigma social e falta de informação. E uma característica insidiosa desta condição — instala-se tão gradualmente que o próprio raramente nota a diferença.</p>
+          <p>O que os estudos mostram é que adiar o diagnóstico tem custos reais: maior risco de isolamento social, deterioração cognitiva mais acelerada e piores resultados de reabilitação.</p>
+        </div>
+        <button class="read-more-btn" onclick="showArticle(0)">Ler artigo completo</button>
+      </article>
+      <aside class="lead-sidebar">
+        <p class="sidebar-title">Marque a sua consulta</p>
+        <div class="cta-card">
+          <p class="cta-label">Serviço gratuito</p>
+          <span class="free-badge">✓ Sem custos</span>
+          <h3>Consulta auditiva gratuita e sem compromisso</h3>
+          <p>Deixe o seu contacto e ligamos nós para marcar na data que preferir.</p>
+          <form class="cta-form" id="sidebarForm">
+            <input type="text" id="sbNome" placeholder="O seu nome" required>
+            <input type="tel" id="sbTel" placeholder="Número de telemóvel" required>
+            <button type="submit">Quero ser contactado →</button>
+          </form>
+          <div class="ty-state" id="sbTy"><div class="ty-icon">✓</div><p>Obrigado! Entramos em contacto brevemente.</p></div>
+          <p class="cta-privacy">Dados confidenciais. Usados apenas para a consulta.</p>
+        </div>
+        <div class="quiz-card">
+          <p class="quiz-label">🎯 Teste rápido</p>
+          <h4>Terá problemas de audição sem saber?</h4>
+          <button class="quiz-btn" onclick="openQuiz()">Responda a 5 perguntas →</button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="articles-section">
+      <div class="section-header"><h2>Artigos em destaque</h2></div>
+      <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-content">
+        <p class="section-kicker">Autoavaliação</p>
+        <h2>Reconhece alguma destas situações no seu dia a dia?</h2>
+        <p>Estes são os sinais mais comuns de perda auditiva. Se identificar dois ou mais, uma avaliação profissional é recomendada.</p>
+        <ul class="checklist">
+          <li><span class="check-icon yes">✓</span><div><strong>Aumenta o volume da televisão</strong><span>Outros comentam que o volume está demasiado alto para si.</span></div></li>
+          <li><span class="check-icon yes">✓</span><div><strong>Pede para repetir com frequência</strong><span>Especialmente em locais com ruído de fundo.</span></div></li>
+          <li><span class="check-icon yes">✓</span><div><strong>Dificuldade ao telefone</strong><span>Mesmo com volume máximo, as palavras chegam pouco claras.</span></div></li>
+          <li><span class="check-icon">?</span><div><strong>Zumbidos nos ouvidos</strong><span>Sons persistentes sem origem externa aparente.</span></div></li>
+          <li><span class="check-icon">?</span><div><strong>Isolamento em conversas de grupo</strong><span>Dificuldade em acompanhar a conversa em situações sociais.</span></div></li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <p class="box-title">Como funciona a avaliação gratuita <span>Grátis</span></p>
+        <ol class="info-steps">
+          <li>Deixa o seu nome e telemóvel</li>
+          <li>A nossa equipa liga para combinar data e hora</li>
+          <li>Vai ao centro auditivo perto de si</li>
+          <li>Especialista avalia em 30 minutos</li>
+          <li>Recebe o resultado e aconselhamento</li>
+        </ol>
+        <button class="info-btn" onclick="openBooking()">Agendar a minha consulta →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======== ARTICLE PAGE ======== -->
+<div id="page-article" class="page">
+  <div class="article-page">
+    <div class="article-layout">
+      <main class="article-main" id="articleMain"></main>
+      <aside class="article-sidebar">
+        <div class="aside-cta">
+          <p class="aside-label">Serviço gratuito</p>
+          <span class="free-badge" style="font-size:0.62rem;padding:2px 7px;margin-bottom:8px;display:inline-block">✓ Sem custos</span>
+          <h3>Consulta auditiva gratuita</h3>
+          <p>Avaliação completa por um especialista. Sem compromisso.</p>
+          <form class="aside-form" id="asideForm">
+            <input type="text" id="asideNome" placeholder="O seu nome" required>
+            <input type="tel" id="asideTel" placeholder="Telemóvel" required>
+            <button type="submit">Quero ser contactado →</button>
+          </form>
+          <div class="aside-ty" id="asideTy">✓ Entraremos em contacto!</div>
+          <p class="aside-priv">Dados confidenciais.</p>
+        </div>
+        <div class="related-articles">
+          <p class="related-title">Outros artigos</p>
+          <div id="relatedList"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">Saúde <em style="font-style:italic;color:var(--accent)">Auditiva</em></p>
+      <p class="footer-sub">Portal de informação independente sobre saúde auditiva em Portugal. Conteúdo informativo, não substitui aconselhamento médico.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Contacto</a>
+      <a href="#">Sobre Nós</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING POPUP -->
+<div class="overlay" id="bookingOverlay" onclick="if(event.target===this)closeBooking()">
+  <div class="modal">
+    <div class="modal-header">
+      <div><h3>Marcar consulta auditiva gratuita</h3><p class="sub">Ligamos nós para confirmar a data e hora</p></div>
+      <span class="modal-close" onclick="closeBooking()">✕</span>
+    </div>
+    <div class="modal-body">
+      <div id="bookingFormWrap">
+        <div class="modal-field"><label>Nome completo</label><input type="text" id="bookNome" placeholder="Ex: Maria da Silva"></div>
+        <div class="modal-field"><label>Telemóvel</label><input type="tel" id="bookTel" placeholder="9XX XXX XXX"></div>
+        <div class="modal-field">
+          <label>Melhor horário para contacto</label>
+          <select id="bookHorario">
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option>Manhã (9h – 12h)</option><option>Tarde (12h – 17h)</option>
+            <option>Final do dia (17h – 19h)</option><option>Qualquer hora</option>
+          </select>
+        </div>
+        <button class="modal-submit" onclick="submitBooking()">Confirmar pedido de consulta →</button>
+        <p class="modal-priv">🔒 Dados confidenciais · Usados apenas para marcar a sua consulta</p>
+      </div>
+      <div class="modal-ty" id="bookingTy">
+        <div class="ty-check">✓</div>
+        <h3>Pedido recebido!</h3>
+        <p>A nossa equipa vai contactá-lo em breve para confirmar a data da consulta.</p>
+        <button class="modal-ty-close" onclick="closeBooking()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ POPUP -->
+<div class="overlay" id="quizOverlay" onclick="if(event.target===this)closeQuiz()">
+  <div class="modal">
+    <div class="modal-header">
+      <div><h3>Teste rápido de audição</h3><p class="sub">5 perguntas · 2 minutos</p></div>
+      <span class="modal-close" onclick="closeQuiz()">✕</span>
+    </div>
+    <div class="modal-body" id="quizBody"></div>
+  </div>
+</div>
+
+<script>
+// ── ARTICLES DATA ──────────────────────────────────────────
+const ARTICLES = [
+  { id:0, cat:'Perda Auditiva', headline:'Porque ignoramos a perda auditiva durante anos — e o que isso nos custa', deck:'Os especialistas chamam-lhe "a epidemia silenciosa". Afeta mais portugueses do que a diabetes — e continuamos a tratar o assunto como um tabu.', readTime:'7 min',
+    prompt:'Escreve um artigo editorial em português europeu (não brasileiro) sobre porque as pessoas ignoram a perda auditiva durante anos e as consequências disso. Tom jornalístico de qualidade, como o Público. Inclui dados reais da OMS. Estrutura: intro, 4 secções com subtítulos h3, uma citação em blockquote, conclusão. Parágrafos com 2-4 frases. Sem listas. 550-700 palavras. Termina com parágrafo suave mencionando que uma consulta auditiva gratuita pode ser o primeiro passo.' },
+  { id:1, cat:'Sinais de Alerta', headline:'Os 8 sinais de alerta que a maioria ignora durante anos', deck:'Da dificuldade em perceber conversas ao telefone ao volume constante da televisão — os primeiros sintomas são subtis mas inequívocos.', readTime:'5 min',
+    prompt:'Escreve um artigo editorial em português europeu sobre os principais sinais de alerta de perda auditiva que as pessoas costumam ignorar. Tom jornalístico e informativo. Estrutura: intro, depois 6-8 sinais com subtítulos h3 para cada um, e conclusão. Cada subtítulo tem 2-3 parágrafos. Sem bullets. 550-700 palavras. Termina mencionando que uma avaliação auditiva gratuita pode esclarecer dúvidas.' },
+  { id:2, cat:'Família', headline:'Como falar com um familiar sobre problemas de audição sem criar conflito', deck:'A resistência é comum. Um especialista explica as melhores estratégias para abordar o tema com empatia e eficácia.', readTime:'6 min',
+    prompt:'Escreve um artigo editorial em português europeu com conselhos práticos para familiares que querem ajudar alguém com perda auditiva a aceitar ajuda. Tom empático, humano, baseado em evidências. Inclui perspetiva psicológica. Estrutura: intro, 4-5 secções h3, uma citação em blockquote de especialista, conclusão. 550-700 palavras. Sem listas. Termina com nota gentil sobre marcar uma consulta gratuita.' },
+  { id:3, cat:'Diagnóstico', headline:'O que acontece numa consulta auditiva? Um guia passo a passo', deck:'Muita gente adia a consulta por não saber o que esperar. Descrevemos o processo completo para que chegue preparado.', readTime:'5 min',
+    prompt:'Escreve um artigo editorial em português europeu que explique de forma clara e tranquilizante o que acontece numa consulta auditiva. Tom informativo e reconfortante. Estrutura: intro sobre o medo de consultas, depois secções h3 descrevendo cada etapa (receção, anamnese, audiograma, resultado, aconselhamento), conclusão. 550-700 palavras. Sem listas. Termina incentivando a marcar uma consulta gratuita.' },
+  { id:4, cat:'Prevenção', headline:'Como proteger a sua audição a partir dos 50 anos — o guia definitivo', deck:'Aos 50 anos, o risco de perda auditiva começa a aumentar. Mas há medidas concretas e simples que podem fazer uma diferença real.', readTime:'6 min',
+    prompt:'Escreve um artigo editorial em português europeu sobre como proteger a audição a partir dos 50 anos. Tom jornalístico de saúde preventiva. Inclui dados sobre prevalência. Estrutura: intro, secções h3 com medidas preventivas (ruído, medicamentos, saúde cardiovascular, vigilância), uma citação em blockquote, conclusão. 550-700 palavras. Sem bullets. Termina sobre a importância de avaliação periódica e como obtê-la gratuitamente.' }
+];
+
+const articleCache = {};
+
+// ── NAVIGATION ─────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('#mainNav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-home').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showArticle(idx) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-article').classList.add('active');
+  document.querySelectorAll('#mainNav a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + idx);
+  if (navEl) navEl.classList.add('active');
+  renderArticlePage(idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('asideForm').style.display = '';
+  document.getElementById('asideTy').style.display = 'none';
+}
+
+// ── ARTICLE PAGE ───────────────────────────────────────────
+function renderArticlePage(idx) {
+  const art = ARTICLES[idx];
+  const d = new Date();
+  const hh = d.getHours().toString().padStart(2,'0');
+  const mm = d.getMinutes().toString().padStart(2,'0');
+
+  document.getElementById('articleMain').innerHTML = `
+    <div class="article-breadcrumb">
+      <span onclick="showPage('home')">Início</span><span class="sep">›</span>
+      <span onclick="showPage('home')">${art.cat}</span><span class="sep">›</span>
+      <span style="color:var(--ink-mid)">${art.headline.substring(0,42)}…</span>
+    </div>
+    <div class="article-kicker-line">${art.cat}</div>
+    <h1 class="article-title">${art.headline}</h1>
+    <div class="article-byline">
+      <span style="font-weight:700;color:var(--accent)">Saúde Auditiva</span>
+      <span style="color:var(--rule)">·</span>
+      <span class="byline-updated">Última atualização: hoje às ${hh}:${mm}</span>
+      <span style="color:var(--rule)">·</span>
+      <span>${art.readTime} de leitura</span>
+    </div>
+    <p class="article-deck">${art.deck}</p>
+    <div id="articleBody">
+      ${[100,90,80,100,75,95,85,100,70,90,100,85].map(w =>
+        `<div class="skeleton" style="height:13px;width:${w}%;margin-bottom:8px;border-radius:2px"></div>`
+      ).join('')}
+      <div class="skeleton" style="height:20px;width:55%;margin:22px 0 10px;border-radius:2px"></div>
+      ${[100,88,75,100,90].map(w =>
+        `<div class="skeleton" style="height:13px;width:${w}%;margin-bottom:8px;border-radius:2px"></div>`
+      ).join('')}
+    </div>
+  `;
+
+  // Related articles
+  document.getElementById('relatedList').innerHTML = ARTICLES.filter((_,i) => i !== idx).map(a => `
+    <div class="related-item" onclick="showArticle(${a.id})">
+      <p class="related-item-cat">${a.cat}</p>
+      <p class="related-item-title">${a.headline}</p>
+    </div>
+  `).join('');
+
+  if (articleCache[idx]) {
+    injectArticleContent(idx, articleCache[idx]);
+  } else {
+    fetchArticleContent(idx);
+  }
+}
+
+async function fetchArticleContent(idx) {
+  const art = ARTICLES[idx];
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'És um jornalista especializado em saúde. Escreves em português europeu culto (não brasileiro). Os teus artigos são informativos, credíveis e nunca soam a publicidade. Usa apenas estas tags HTML: <p>, <h3>, <blockquote>. Responde APENAS com o HTML do artigo sem preâmbulo, sem markdown, sem asteriscos.',
+        messages: [{ role: 'user', content: art.prompt }]
+      })
+    });
+    const data = await resp.json();
+    const html = data.content?.map(b => b.text || '').join('') || '<p>Conteúdo temporariamente indisponível.</p>';
+    articleCache[idx] = html;
+    injectArticleContent(idx, html);
+  } catch(e) {
+    if (document.getElementById('articleBody')) {
+      document.getElementById('articleBody').innerHTML = '<p style="color:var(--ink-light);padding:20px 0">Não foi possível carregar o artigo. Por favor tente novamente.</p>';
+    }
+  }
+}
+
+function injectArticleContent(idx, html) {
+  // Split at ~midpoint to insert inline CTA
+  const mid = Math.floor(html.length / 2);
+  const cut = html.indexOf('</p>', mid);
+  const first  = cut > -1 ? html.substring(0, cut + 4) : html;
+  const second = cut > -1 ? html.substring(cut + 4) : '';
+
+  const cta = `
+    <div class="article-inline-cta">
+      <span class="free-badge" style="margin-bottom:10px;display:inline-block">✓ Gratuito</span>
+      <h4>Quer saber o estado da sua audição?</h4>
+      <p>Marque agora uma consulta auditiva gratuita. Ligamos nós para confirmar a data e hora.</p>
+      <div class="inline-row" id="inRow${idx}">
+        <input type="text" id="inN${idx}" placeholder="O seu nome">
+        <input type="tel" id="inT${idx}" placeholder="Telemóvel">
+        <button onclick="submitInline(${idx})">Marcar →</button>
+      </div>
+      <div class="inline-cta-ty" id="inTy${idx}">✓ Recebido! Entraremos em contacto brevemente.</div>
+      <p class="inline-cta-priv">🔒 Dados confidenciais · Apenas usados para marcar a consulta</p>
+    </div>
+  `;
+
+  const bodyEl = document.getElementById('articleBody');
+  if (bodyEl) bodyEl.innerHTML = `<div class="article-content">${first}${cta}${second}</div>`;
+}
+
+function submitInline(idx) {
+  const nome = document.getElementById('inN' + idx)?.value.trim();
+  const tel  = document.getElementById('inT' + idx)?.value.trim();
+  if (!nome || !tel) return;
+  console.log('Lead (inline):', { nome, tel, article: idx });
+  const row = document.getElementById('inRow' + idx);
+  const ty  = document.getElementById('inTy' + idx);
+  if (row) row.style.display = 'none';
+  if (ty)  ty.style.display  = 'block';
+}
+
+// ── HOME ARTICLES GRID ─────────────────────────────────────
+function renderArticlesGrid() {
+  document.getElementById('articlesGrid').innerHTML = ARTICLES.slice(1).map(a => `
+    <div class="article-card" onclick="showArticle(${a.id})">
+      <p class="card-kicker">${a.cat}</p>
+      <h3 class="card-headline">${a.headline}</h3>
+      <p class="card-excerpt">${a.deck}</p>
+      <p class="card-meta"><span>Saúde Auditiva</span><span class="dot">·</span><span>${a.readTime} de leitura</span></p>
+      <button class="card-read-btn">Ler artigo</button>
+    </div>
+  `).join('');
+}
+
+// ── BOOKING ────────────────────────────────────────────────
+function openBooking()  { document.getElementById('bookingOverlay').classList.add('open'); }
+function closeBooking() {
+  document.getElementById('bookingOverlay').classList.remove('open');
+  document.getElementById('bookingFormWrap').style.display = '';
+  document.getElementById('bookingTy').style.display = 'none';
+}
+function submitBooking() {
+  const nome = document.getElementById('bookNome').value.trim();
+  const tel  = document.getElementById('bookTel').value.trim();
+  document.getElementById('bookNome').style.borderColor = nome ? 'var(--rule)' : '#c0392b';
+  document.getElementById('bookTel').style.borderColor  = tel  ? 'var(--rule)' : '#c0392b';
+  if (!nome || !tel) return;
+  console.log('Lead (booking):', { nome, tel, horario: document.getElementById('bookHorario').value });
+  document.getElementById('bookingFormWrap').style.display = 'none';
+  document.getElementById('bookingTy').style.display = 'block';
+}
+
+// ── QUIZ ───────────────────────────────────────────────────
+const QS = [
+  { q:'Com que frequência pede a alguém que repita o que disse?', opts:['Raramente ou nunca','Às vezes, em ambientes ruidosos','Frequentemente, mesmo em silêncio','Quase sempre'] },
+  { q:'Tem dificuldade em perceber conversas ao telefone?', opts:['Não, sem dificuldade','Às vezes com algumas vozes','Frequentemente, mesmo com volume alto','Evito falar ao telefone'] },
+  { q:'Alguém comentou que tem o volume da TV muito alto?', opts:['Nunca','Uma ou duas vezes','Sim, com alguma frequência','É uma queixa constante'] },
+  { q:'Ouve zumbidos ou apitos nos ouvidos?', opts:['Não','Raramente','Às vezes, sem motivo','Sim, muito frequentemente'] },
+  { q:'Dificuldade em acompanhar conversas em grupo?', opts:['Não, acompanho bem','É um pouco difícil','Bastante difícil','Evito essas situações'] }
+];
+let qStep = 0, qScore = 0;
+
+function openQuiz()  { qStep = 0; qScore = 0; renderQ(); document.getElementById('quizOverlay').classList.add('open'); }
+function closeQuiz() { document.getElementById('quizOverlay').classList.remove('open'); }
+
+function renderQ() {
+  if (qStep >= QS.length) { showQResult(); return; }
+  const q = QS[qStep];
+  const pct = (qStep / QS.length * 100).toFixed(0);
+  document.getElementById('quizBody').innerHTML = `
+    <div style="height:3px;background:var(--rule-light);margin-bottom:16px;border-radius:2px">
+      <div style="height:100%;background:var(--accent);border-radius:2px;width:${pct}%;transition:width 0.3s"></div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--ink-faint);margin-bottom:12px">Pergunta ${qStep+1} de ${QS.length}</p>
+    <p style="font-family:var(--serif);font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:14px;line-height:1.4">${q.q}</p>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      ${q.opts.map((o,i) => `<button onclick="answerQ(${i})" style="background:var(--paper-dark);border:1px solid var(--rule);border-radius:3px;padding:10px 13px;cursor:pointer;font-size:0.86rem;color:var(--ink-mid);text-align:left;font-family:var(--sans);transition:all 0.15s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--rule)';this.style.color='var(--ink-mid)'">${o}</button>`).join('')}
+    </div>
+  `;
+}
+
+function answerQ(i) { qScore += i; qStep++; renderQ(); }
+
+function showQResult() {
+  let icon, title, text;
+  if (qScore <= 3)      { icon='✅'; title='A sua audição parece estar bem'; text='As suas respostas não indicam sinais significativos. Ainda assim, uma avaliação periódica é recomendada a partir dos 50 anos.'; }
+  else if (qScore <= 7) { icon='⚠️'; title='Alguns sinais merecem atenção'; text='As suas respostas indicam alguns sinais que podem estar relacionados com perda auditiva ligeira. Uma consulta de avaliação é recomendada.'; }
+  else                  { icon='🔔'; title='Recomendamos uma avaliação'; text='As suas respostas sugerem que pode ter perda auditiva. Na maioria dos casos há solução — uma consulta gratuita é o primeiro passo.'; }
+  document.getElementById('quizBody').innerHTML = `
+    <div style="text-align:center;padding:8px 0">
+      <div style="font-size:2.2rem;margin-bottom:10px">${icon}</div>
+      <h3 style="font-family:var(--serif);font-size:1.2rem;margin-bottom:9px">${title}</h3>
+      <p style="font-size:0.86rem;color:var(--ink-light);line-height:1.6;margin-bottom:18px">${text}</p>
+      <input type="text" id="qN" placeholder="O seu nome" style="width:100%;border:1.5px solid var(--rule);border-radius:3px;padding:9px 11px;font-family:var(--sans);font-size:0.86rem;margin-bottom:7px;outline:none;background:white">
+      <input type="tel" id="qT" placeholder="O seu telemóvel" style="width:100%;border:1.5px solid var(--rule);border-radius:3px;padding:9px 11px;font-family:var(--sans);font-size:0.86rem;margin-bottom:11px;outline:none;background:white">
+      <button onclick="submitQuiz()" style="width:100%;background:var(--accent);color:white;font-family:var(--sans);font-size:0.86rem;font-weight:700;border:none;border-radius:3px;padding:11px;cursor:pointer">Marcar consulta gratuita →</button>
+      <div id="qTy" style="display:none;margin-top:11px;font-size:0.84rem;font-weight:600;color:var(--accent)">✓ Recebido! Entraremos em contacto brevemente.</div>
+      <p style="font-size:0.66rem;color:var(--ink-faint);margin-top:7px">Dados confidenciais</p>
+    </div>
+  `;
+}
+
+function submitQuiz() {
+  const nome = document.getElementById('qN').value.trim();
+  const tel  = document.getElementById('qT').value.trim();
+  if (!nome || !tel) return;
+  console.log('Lead (quiz):', { nome, tel, score: qScore });
+  ['qN','qT'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.querySelector('#quizBody button').style.display = 'none';
+  document.getElementById('qTy').style.display = 'block';
+}
+
+// ── FORMS ──────────────────────────────────────────────────
+document.getElementById('sidebarForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const nome = document.getElementById('sbNome').value.trim();
+  const tel  = document.getElementById('sbTel').value.trim();
+  if (!nome || !tel) return;
+  console.log('Lead (sidebar):', { nome, tel });
+  e.target.style.display = 'none';
+  document.getElementById('sbTy').style.display = 'block';
+});
+
+document.getElementById('asideForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const nome = document.getElementById('asideNome').value.trim();
+  const tel  = document.getElementById('asideTel').value.trim();
+  if (!nome || !tel) return;
+  console.log('Lead (aside):', { nome, tel });
+  e.target.style.display = 'none';
+  document.getElementById('asideTy').style.display = 'block';
+});
+
+// ── INIT ───────────────────────────────────────────────────
+const d = new Date();
+document.getElementById('siteDate').textContent = d.toLocaleDateString('pt-PT', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+const hh = d.getHours().toString().padStart(2,'0');
+const mm = d.getMinutes().toString().padStart(2,'0');
+document.getElementById('homeDate').textContent = `Última atualização: hoje às ${hh}:${mm}`;
+
+renderArticlesGrid();
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+}), { threshold: 0.08 });
+document.querySelectorAll('.article-card,.checklist li,.stat-cell').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(14px)';
+  el.style.transition='opacity 0.4s ease,transform 0.4s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
