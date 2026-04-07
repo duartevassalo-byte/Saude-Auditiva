@@ -1,5 +1,15 @@
 [
   {
+    "cat": "Sinais de Alerta",
+    "corpo": "<p>Este é um artigo de teste para confirmar que o sistema de publicação automática está a funcionar correctamente.</p><h3>Como funciona</h3><p>O Make gera o artigo via Claude, dispara o GitHub Action, e o artigo aparece no site automaticamente.</p>",
+    "data": "2026-04-07",
+    "deck": "Este artigo foi publicado automaticamente pelo GitHub Action.",
+    "hora": "19:00",
+    "id": "2026-04-07-test",
+    "img": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80",
+    "titulo": "Teste de publicação automática"
+  },
+  {
     "id": "2026-04-07-01",
     "data": "2026-04-07",
     "hora": "08:00",
