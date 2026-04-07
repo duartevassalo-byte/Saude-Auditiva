@@ -170,7 +170,14 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 .site-tagline{text-align:center;max-width:100%}
 }
 @media(max-width:600px){.articles-grid{grid-template-columns:1fr}.cat-article-row{grid-template-columns:1fr}.cat-art-img{display:none}}
-</style>
+
+.legal-page{max-width:760px;margin:0 auto;padding:36px 24px 60px}
+.legal-page h1{font-family:var(--serif);font-size:1.8rem;font-weight:700;margin-bottom:6px}
+.legal-page .legal-meta{font-size:0.78rem;color:var(--ink-light);margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.legal-page h2{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin:28px 0 10px;color:var(--ink)}
+.legal-page p{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin-bottom:12px}
+.legal-page ul{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin:0 0 12px 20px}
+.legal-page ul li{margin-bottom:6px}</style>
 </head>
 <body>
 <header class="masthead"><div class="main-container">
@@ -183,8 +190,8 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <a onclick="showPage('home')" id="nav-home" class="active">Inicio</a>
 <a onclick="showCat('Perda Auditiva')" id="nav-perda">Perda Auditiva</a>
 <a onclick="showCat('Sinais de Alerta')" id="nav-sinais">Sinais de Alerta</a>
-<a onclick="showCat('Prevencao')" id="nav-prev">Prevencao</a>
-<a onclick="showCat('Familia')" id="nav-familia">Familia</a>
+<a onclick="showCat('Prevenção')" id="nav-prev">Prevencao</a>
+<a onclick="showCat('Família')" id="nav-familia">Familia</a>
 <a onclick="showCat('Aparelhos')" id="nav-ap">Aparelhos</a>
 <a onclick="openBooking()" style="color:var(--accent);font-weight:700">Consulta Gratuita</a>
 </nav>
@@ -289,7 +296,7 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 </div></div></div>
 <footer><div class="footer-inner">
 <div><p class="footer-name">Saude Auditiva</p><p class="footer-sub">Portal de informacao independente sobre saude auditiva em Portugal.</p></div>
-<div class="footer-links"><a href="#">Privacidade</a><a href="#">Termos</a><a href="#">Contacto</a></div>
+<div class="footer-links"><a href="#">Privacidade</a><a href="#">Termos</a><a href="mailto:geral@saudeauditiva.pt">Contacto</a></div>
 </div></footer>
 <div class="overlay" id="bookingOverlay" onclick="if(event.target===this)closeBooking()"><div class="modal">
 <div class="modal-header"><div><h3>Marcar consulta auditiva gratuita</h3><p class="sub">Ligamos nos para confirmar</p></div><span class="modal-close" onclick="closeBooking()">x</span></div>
@@ -391,5 +398,51 @@ function answerQ(i){qScore+=i;qStep++;renderQ();}
 function showQResult(){var icon,title,text;if(qScore<=3){icon='OK';title='A sua audicao parece estar bem';text='As suas respostas nao indicam sinais significativos.';}else if(qScore<=7){icon='!!';title='Alguns sinais merecem atencao';text='Uma consulta de avaliacao e recomendada.';}else{icon='!';title='Recomendamos uma avaliacao';text='Na maioria dos casos ha solucao.';}document.getElementById('quizBody').innerHTML='<div style="text-align:center"><div style="font-size:2.2rem;margin-bottom:10px">'+icon+'</div><h3 style="font-family:var(--serif);font-size:1.2rem;margin-bottom:9px">'+title+'</h3><p style="font-size:0.86rem;color:var(--ink-light);margin-bottom:18px">'+text+'</p><button onclick="openBooking();closeQuiz()" style="background:var(--accent);color:white;font-family:var(--sans);font-size:0.86rem;font-weight:700;border:none;border-radius:3px;padding:11px;width:100%;cursor:pointer">Marcar consulta gratuita</button></div>';}
 document.getElementById('siteDate').textContent=new Date().toLocaleDateString('pt-PT',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 </script>
+
+<!-- POLÍTICA DE PRIVACIDADE -->
+<div id="page-privacidade" class="page">
+<div class="main-container"><div class="legal-page">
+<h1>Política de Privacidade</h1>
+<p class="legal-meta">Última actualização: Abril de 2026 · Responsável: Penguin Style Lda</p>
+<h2>1. Identificação do Responsável</h2>
+<p><strong>Penguin Style Lda</strong><br>Rua Dr. Henrique Carvalhão, Lote 12, Loja 1<br>6000-235 Castelo Branco · NIPC: 515167657</p>
+<h2>2. Dados Recolhidos</h2>
+<p>Recolhemos: nome completo, número de telemóvel e preferência de horário de contacto, no âmbito do pedido de agendamento de consulta auditiva gratuita.</p>
+<h2>3. Finalidades</h2>
+<p>Os dados são usados exclusivamente para agendamento e confirmação de consultas auditivas gratuitas. Não são utilizados para marketing não solicitado nem partilhados com terceiros para fins próprios destes.</p>
+<h2>4. Base Legal (RGPD)</h2>
+<p><strong>Consentimento</strong> (art.º 6.º, n.º 1, al. a) — ao preencher o formulário. <strong>Execução de pré-contrato</strong> (art.º 6.º, n.º 1, al. b) — para dar seguimento ao pedido.</p>
+<h2>5. Conservação</h2>
+<p>Dados conservados pelo período necessário à prestação do serviço e no máximo 12 meses após o último contacto.</p>
+<h2>6. Partilha de Dados</h2>
+<p>Os dados poderão ser partilhados com o Centro Português Auditivo, exclusivamente para fins de agendamento. Esta entidade está igualmente sujeita ao RGPD.</p>
+<h2>7. Os seus Direitos</h2>
+<p>Tem direito de acesso, rectificação, apagamento, limitação, portabilidade, oposição e retirada do consentimento. Contacte-nos pelos dados acima. Pode também reclamar junto da <strong>CNPD</strong> (www.cnpd.pt).</p>
+<h2>8. Segurança e Cookies</h2>
+<p>Adoptamos medidas técnicas e organizativas adequadas para proteger os seus dados. Este website não utiliza cookies de rastreamento ou publicidade.</p>
+</div></div>
+</div>
+
+<!-- TERMOS E CONDIÇÕES -->
+<div id="page-termos" class="page">
+<div class="main-container"><div class="legal-page">
+<h1>Termos e Condições de Utilização</h1>
+<p class="legal-meta">Última actualização: Abril de 2026 · Penguin Style Lda</p>
+<h2>1. Identificação</h2>
+<p><strong>Penguin Style Lda</strong>, Rua Dr. Henrique Carvalhão, Lote 12, Loja 1, 6000-235 Castelo Branco · NIPC 515167657</p>
+<h2>2. Aceitação</h2>
+<p>O acesso e utilização deste website implica a aceitação integral destes Termos. Caso não concorde, abstenha-se de utilizar o website.</p>
+<h2>3. Objeto</h2>
+<p>Este website divulga informação editorial sobre saúde auditiva e facilita o agendamento de consultas auditivas gratuitas em parceria com o Centro Português Auditivo. A informação publicada tem carácter meramente informativo e não substitui aconselhamento médico especializado.</p>
+<h2>4. Consultas Gratuitas</h2>
+<p>As consultas auditivas são inteiramente gratuitas e sem compromisso de compra. O agendamento é feito por contacto telefónico após submissão do formulário.</p>
+<h2>5. Propriedade Intelectual</h2>
+<p>Todo o conteúdo editorial é propriedade do Operador ou dos seus fornecedores e está protegido pela legislação de direito de autor. É proibida a reprodução sem autorização prévia e escrita.</p>
+<h2>6. Responsabilidade</h2>
+<p>O Operador não garante a ausência de erros no conteúdo publicado e não se responsabiliza por danos resultantes da utilização do website.</p>
+<h2>7. Lei Aplicável e Foro</h2>
+<p>Estes Termos são regidos pela lei portuguesa. É competente o tribunal da comarca de Castelo Branco. Para litígios de consumo: plataforma europeia de resolução em linha em <strong>ec.europa.eu/consumers/odr</strong>.</p>
+</div></div>
+</div>
 </body>
 </html>
