@@ -1,0 +1,33 @@
+name: Publicar Artigo
+on:
+  repository_dispatch:
+    types: [novo-artigo]
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Adicionar artigo ao JSON
+        run: |
+          python3 - << 'EOF'
+          import json, os
+          payload = json.loads(os.environ["ARTIGO"])
+          with open("artigos.json") as f:
+              artigos = json.load(f)
+          artigos.insert(0, payload)
+          with open("artigos.json", "w") as f:
+              json.dump(artigos, f, ensure_ascii=False, indent=2)
+          print(f"Total artigos: {len(artigos)}")
+          EOF
+        env:
+          ARTIGO: ${{ toJson(github.event.client_payload.artigo) }}
+      - name: Commit e push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add artigos.json
+          git commit -m "Novo artigo publicado automaticamente"
+          git push
