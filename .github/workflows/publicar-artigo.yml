@@ -10,24 +10,42 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
       - name: Adicionar artigo ao JSON
         run: |
-          python3 - << 'EOF'
-          import json, os
-          payload = json.loads(os.environ["ARTIGO"])
+          python3 - << 'PYEOF'
+          import json, os, sys
+          raw = os.environ.get("ARTIGO", "{}")
+          try:
+              payload = json.loads(raw)
+          except:
+              sys.exit(1)
+          artigo = None
+          if isinstance(payload, list):
+              texto = payload[0].get("text","") if payload else ""
+              texto = texto.strip().strip("```json").strip("```").strip()
+              artigo = json.loads(texto)
+          elif isinstance(payload, dict) and "text" in payload and "titulo" not in payload:
+              texto = payload["text"].strip().strip("```json").strip("```").strip()
+              artigo = json.loads(texto)
+          elif isinstance(payload, dict) and "titulo" in payload:
+              artigo = payload
+          else:
+              sys.exit(1)
           with open("artigos.json") as f:
               artigos = json.load(f)
-          artigos.insert(0, payload)
-          with open("artigos.json", "w") as f:
+          artigos.insert(0, artigo)
+          with open("artigos.json","w") as f:
               json.dump(artigos, f, ensure_ascii=False, indent=2)
-          print(f"Total artigos: {len(artigos)}")
-          EOF
+          print(f"OK: {artigo.get('titulo','?')}")
+          PYEOF
         env:
           ARTIGO: ${{ toJson(github.event.client_payload.artigo) }}
+
       - name: Commit e push
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add artigos.json
-          git commit -m "Novo artigo publicado automaticamente"
+          git commit -m "Novo artigo publicado"
           git push
