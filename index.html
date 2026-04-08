@@ -190,8 +190,8 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <a onclick="showPage('home')" id="nav-home" class="active">Inicio</a>
 <a onclick="showCat('Perda Auditiva')" id="nav-perda">Perda Auditiva</a>
 <a onclick="showCat('Sinais de Alerta')" id="nav-sinais">Sinais de Alerta</a>
-<a onclick="showCat('PrevenÃ§Ã£o')" id="nav-prev">Prevencao</a>
-<a onclick="showCat('FamÃ­lia')" id="nav-familia">Familia</a>
+<a onclick="showCat('PrevenÃÂ§ÃÂ£o')" id="nav-prev">Prevencao</a>
+<a onclick="showCat('FamÃÂ­lia')" id="nav-familia">Familia</a>
 <a onclick="showCat('Aparelhos')" id="nav-ap">Aparelhos</a>
 <a onclick="openBooking()" style="color:var(--accent);font-weight:700">Consulta Gratuita</a>
 </nav>
@@ -315,133 +315,136 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 </div></div>
 <script>
 var ARTICLES=[];
-var CATS=['Perda Auditiva','Sinais de Alerta','Prevencao','Familia','Aparelhos'];
-
-fetch('https://raw.githubusercontent.com/duartevassalo-byte/Saude-Auditiva/main/artigos.json?cb='+Date.now())
+fetch("https://raw.githubusercontent.com/duartevassalo-byte/Saude-Auditiva/main/artigos.json?cb="+Date.now())
 .then(function(r){return r.json();})
 .then(function(d){ARTICLES=d;renderHome();})
-.catch(function(e){console.log('Erro:',e);document.getElementById('recentGrid').innerHTML='<p class="loading-msg">Sem artigos de momento.</p>';});
+.catch(function(e){console.log("Erro:",e);document.getElementById("recentGrid").innerHTML="<p class=\"loading-msg\">Sem artigos de momento.</p>";});
 
 function renderHome(){
-if(!ARTICLES.length)return;
-var a=ARTICLES[0];
-document.getElementById('leadCat').textContent=a.cat;
-document.getElementById('leadTitle').textContent=a.titulo;
-document.getElementById('leadDate').textContent=fmtDate(a.data)+(a.hora?' as '+a.hora:'');
-document.getElementById('leadDeck').textContent=a.deck;
-var tmp=document.createElement('div');tmp.innerHTML=a.corpo;
-var ps=tmp.querySelectorAll('p');var pre='';
-for(var i=0;i<Math.min(2,ps.length);i++)pre+='<p>'+ps[i].textContent+'</p>';
-document.getElementById('leadBody').innerHTML=pre;
-document.getElementById('leadBtn').onclick=function(){showArticle(a.id);};
-var rec=ARTICLES.slice(1,5);
-document.getElementById('recentGrid').innerHTML=rec.map(function(art){
-return '<div class="article-card" onclick="showArticle(''+art.id+'')">'+(art.img?'<img class="card-img" src="'+art.img+'" alt="">':'')+'<p class="card-kicker">'+art.cat+'</p><h3 class="card-headline">'+art.titulo+'</h3><p class="card-meta">Saude Auditiva . '+fmtDate(art.data)+'</p><button class="card-read-btn">Ler artigo</button></div>';
-}).join('')||'<p class="loading-msg">Novo artigo em breve.</p>';
+  if(!ARTICLES.length)return;
+  var a=ARTICLES[0];
+  document.getElementById("leadCat").textContent=a.cat;
+  document.getElementById("leadTitle").textContent=a.titulo;
+  document.getElementById("leadDate").textContent=fmtDate(a.data)+(a.hora?" as "+a.hora:"");
+  document.getElementById("leadDeck").textContent=a.deck;
+  var tmp=document.createElement("div");tmp.innerHTML=a.corpo;
+  var ps=tmp.querySelectorAll("p");var pre="";
+  for(var i=0;i<Math.min(2,ps.length);i++)pre+="<p>"+ps[i].textContent+"</p>";
+  document.getElementById("leadBody").innerHTML=pre;
+  document.getElementById("leadBtn").onclick=function(){showArticle(a.id);};
+  var rec=ARTICLES.slice(1,5);
+  document.getElementById("recentGrid").innerHTML=rec.map(function(art){
+    return "<div class=\"article-card\" onclick=\"showArticle('"+art.id+"')\">"+(art.img?"<img class=\"card-img\" src=\""+art.img+"\" alt=\"\">":"")+"<p class=\"card-kicker\">"+art.cat+"</p><h3 class=\"card-headline\">"+art.titulo+"</h3><p class=\"card-meta\">Saude Auditiva . "+fmtDate(art.data)+"</p><button class=\"card-read-btn\">Ler artigo</button></div>";
+  }).join("")||"<p class=\"loading-msg\">Novo artigo em breve.</p>";
 }
 
 function showPage(n){
-document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-document.getElementById('page-'+n).classList.add('active');
-document.querySelectorAll('#mainNav a').forEach(function(a){a.classList.remove('active');});
-document.getElementById('nav-home').classList.add('active');
-window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
+  document.getElementById("page-"+n).classList.add("active");
+  document.querySelectorAll("#mainNav a").forEach(function(a){a.classList.remove("active");});
+  document.getElementById("nav-home").classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function showCat(cat){
-document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-document.getElementById('page-cat').classList.add('active');
-document.querySelectorAll('#mainNav a').forEach(function(a){a.classList.remove('active');});
-document.getElementById('catTitle').textContent=cat;
-var arts=ARTICLES.filter(function(a){return a.cat===cat;});
-document.getElementById('catCount').textContent=arts.length+' artigo'+(arts.length!==1?'s':'');
-document.getElementById('catList').innerHTML=arts.length?arts.map(function(a){
-return '<div class="cat-article-row" onclick="showArticle(''+a.id+'')">'+'<img class="cat-art-img" src="'+(a.img||'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=60')+'" alt="">'+'<div><p class="cat-art-kicker">'+a.cat+'</p><p class="cat-art-title">'+a.titulo+'</p><p class="cat-art-deck">'+a.deck+'</p><p class="cat-art-meta">'+fmtDate(a.data)+(a.hora?' . '+a.hora:'')+'</p></div></div>';
-}).join(''):'<p class="loading-msg">Ainda sem artigos nesta categoria.</p>';
-window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
+  document.getElementById("page-cat").classList.add("active");
+  document.querySelectorAll("#mainNav a").forEach(function(a){a.classList.remove("active");});
+  document.getElementById("catTitle").textContent=cat;
+  var arts=ARTICLES.filter(function(a){return a.cat===cat;});
+  document.getElementById("catCount").textContent=arts.length+" artigo"+(arts.length!==1?"s":"");
+  document.getElementById("catList").innerHTML=arts.length?arts.map(function(a){
+    return "<div class=\"cat-article-row\" onclick=\"showArticle('"+a.id+"')\">"+"<img class=\"cat-art-img\" src=\""+( a.img||"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=60")+"\" alt=\"\">"+"<div><p class=\"cat-art-kicker\">"+a.cat+"</p><p class=\"cat-art-title\">"+a.titulo+"</p><p class=\"cat-art-deck\">"+a.deck+"</p><p class=\"cat-art-meta\">"+fmtDate(a.data)+(a.hora?" . "+a.hora:"")+"</p></div></div>";
+  }).join(""):"<p class=\"loading-msg\">Ainda sem artigos nesta categoria.</p>";
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function showArticle(id){
-var a=ARTICLES.find(function(x){return x.id==id;});
-if(!a)return;
-document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-document.getElementById('page-article').classList.add('active');
-document.querySelectorAll('#mainNav a').forEach(function(x){x.classList.remove('active');});
-document.getElementById('articleMain').innerHTML=(a.img?'<img class="article-img" src="'+a.img+'" alt="'+a.titulo+'">' :'')+
-'<div class="article-kicker-line">'+a.cat+'</div>'+
-'<h1 class="article-title">'+a.titulo+'</h1>'+
-'<div class="article-byline"><span style="font-weight:700;color:var(--accent)">Saude Auditiva</span><span style="color:var(--rule)"> . </span><span>'+fmtDate(a.data)+(a.hora?' as '+a.hora:'')+'</span></div>'+
-'<p class="article-deck">'+a.deck+'</p>'+
-'<div class="article-content">'+a.corpo+'</div>'+
-'<div class="article-inline-cta"><h4>Quer saber o estado da sua audicao?</h4><p>Uma consulta gratuita pode mudar tudo. Sem compromisso, sem custos.</p>'+
-'<div class="inline-row"><input type="text" id="inlNome" placeholder="O seu nome"><input type="tel" id="inlTel" placeholder="Telemovel"><button onclick="submitInline()">Marcar</button></div>'+
-'<p id="inlTy" class="inline-cta-ty">Entraremos em contacto em breve!</p></div>';
-document.getElementById('relatedList').innerHTML=ARTICLES.filter(function(x){return x.id!=id;}).slice(0,5).map(function(b){
-return '<div class="related-item" onclick="showArticle(''+b.id+'')"><p class="related-item-cat">'+b.cat+'</p><p class="related-item-title">'+b.titulo+'</p></div>';
-}).join('');
-window.scrollTo({top:0,behavior:'smooth'});
+  var a=ARTICLES.find(function(x){return x.id==id;});
+  if(!a)return;
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
+  document.getElementById("page-article").classList.add("active");
+  document.querySelectorAll("#mainNav a").forEach(function(x){x.classList.remove("active");});
+  document.getElementById("articleMain").innerHTML=
+    (a.img?"<img class=\"article-img\" src=\""+a.img+"\" alt=\""+a.titulo+"\">" :"")+
+    "<div class=\"article-kicker-line\">"+a.cat+"</div>"+
+    "<h1 class=\"article-title\">"+a.titulo+"</h1>"+
+    "<div class=\"article-byline\"><span style=\"font-weight:700;color:var(--accent)\">Saude Auditiva</span><span style=\"color:var(--rule)\"> . </span><span>"+fmtDate(a.data)+(a.hora?" as "+a.hora:"")+"</span></div>"+
+    "<p class=\"article-deck\">"+a.deck+"</p>"+
+    "<div class=\"article-content\">"+a.corpo+"</div>"+
+    "<div class=\"article-inline-cta\"><h4>Quer saber o estado da sua audicao?</h4><p>Uma consulta gratuita pode mudar tudo. Sem compromisso, sem custos.</p>"+
+    "<div class=\"inline-row\"><input type=\"text\" id=\"inlNome\" placeholder=\"O seu nome\"><input type=\"tel\" id=\"inlTel\" placeholder=\"Telemovel\"><button onclick=\"submitInline()\">Marcar</button></div>"+
+    "<p id=\"inlTy\" class=\"inline-cta-ty\">Entraremos em contacto em breve!</p></div>";
+  document.getElementById("relatedList").innerHTML=ARTICLES.filter(function(x){return x.id!=id;}).slice(0,5).map(function(b){
+    return "<div class=\"related-item\" onclick=\"showArticle('"+b.id+"')\">"+"<p class=\"related-item-cat\">"+b.cat+"</p><p class=\"related-item-title\">"+b.titulo+"</p></div>";
+  }).join("");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function submitInline(){var n=document.getElementById('inlNome').value.trim();var t=document.getElementById('inlTel').value.trim();if(!n||!t)return;document.getElementById('inlTy').style.display='block';}
-function fmtDate(s){if(!s)return '';var d=new Date(s+'T12:00:00');return d.toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'});}
-function openBooking(){document.getElementById('bookingOverlay').classList.add('open');}
-function closeBooking(){document.getElementById('bookingOverlay').classList.remove('open');document.getElementById('bookingFormWrap').style.display='';document.getElementById('bookingTy').style.display='none';}
-function submitBooking(){var n=document.getElementById('bookNome').value.trim();var t=document.getElementById('bookTel').value.trim();if(!n||!t)return;document.getElementById('bookingFormWrap').style.display='none';document.getElementById('bookingTy').style.display='block';}
-document.getElementById('sidebarForm').addEventListener('submit',function(e){e.preventDefault();var n=document.getElementById('sbNome').value.trim();var t=document.getElementById('sbTel').value.trim();if(!n||!t)return;e.target.style.display='none';document.getElementById('sbTy').style.display='block';});
-document.getElementById('asideForm').addEventListener('submit',function(e){e.preventDefault();e.target.style.display='none';document.getElementById('asideTy').style.display='block';});
-var QS=[{q:'Com que frequencia pede a alguem que repita o que disse?',o:['Raramente ou nunca','As vezes, em ambientes ruidosos','Frequentemente, mesmo em silencio','Quase sempre']},{q:'Tem dificuldade em perceber conversas ao telefone?',o:['Nao, sem dificuldade','As vezes','Frequentemente','Evito falar ao telefone']},{q:'Alguem comentou que tem o volume da TV muito alto?',o:['Nunca','Uma ou duas vezes','Sim, com alguma frequencia','E uma queixa constante']},{q:'Ouve zumbidos ou apitos nos ouvidos?',o:['Nao','Raramente','As vezes','Sim, muito frequentemente']},{q:'Dificuldade em acompanhar conversas em grupo?',o:['Nao','Um pouco dificil','Bastante dificil','Evito essas situacoes']}];
+function submitInline(){var n=document.getElementById("inlNome").value.trim();var t=document.getElementById("inlTel").value.trim();if(!n||!t)return;document.getElementById("inlTy").style.display="block";}
+
+function fmtDate(s){if(!s)return "";var d=new Date(s+"T12:00:00");return d.toLocaleDateString("pt-PT",{day:"numeric",month:"long",year:"numeric"});}
+function openBooking(){document.getElementById("bookingOverlay").classList.add("open");}
+function closeBooking(){document.getElementById("bookingOverlay").classList.remove("open");document.getElementById("bookingFormWrap").style.display="";document.getElementById("bookingTy").style.display="none";}
+function submitBooking(){var n=document.getElementById("bookNome").value.trim();var t=document.getElementById("bookTel").value.trim();if(!n||!t)return;document.getElementById("bookingFormWrap").style.display="none";document.getElementById("bookingTy").style.display="block";}
+
+document.getElementById("sidebarForm").addEventListener("submit",function(e){e.preventDefault();var n=document.getElementById("sbNome").value.trim();var t=document.getElementById("sbTel").value.trim();if(!n||!t)return;e.target.style.display="none";document.getElementById("sbTy").style.display="block";});
+document.getElementById("asideForm").addEventListener("submit",function(e){e.preventDefault();e.target.style.display="none";document.getElementById("asideTy").style.display="block";});
+
+var QS=[{q:"Com que frequencia pede a alguem que repita o que disse?",o:["Raramente ou nunca","As vezes, em ambientes ruidosos","Frequentemente, mesmo em silencio","Quase sempre"]},{q:"Tem dificuldade em perceber conversas ao telefone?",o:["Nao, sem dificuldade","As vezes","Frequentemente","Evito falar ao telefone"]},{q:"Alguem comentou que tem o volume da TV muito alto?",o:["Nunca","Uma ou duas vezes","Sim, com alguma frequencia","E uma queixa constante"]},{q:"Ouve zumbidos ou apitos nos ouvidos?",o:["Nao","Raramente","As vezes","Sim, muito frequentemente"]},{q:"Dificuldade em acompanhar conversas em grupo?",o:["Nao","Um pouco dificil","Bastante dificil","Evito essas situacoes"]}];
 var qStep=0,qScore=0;
-function openQuiz(){qStep=0;qScore=0;renderQ();document.getElementById('quizOverlay').classList.add('open');}
-function closeQuiz(){document.getElementById('quizOverlay').classList.remove('open');}
-function renderQ(){if(qStep>=QS.length){showQResult();return;}var q=QS[qStep];document.getElementById('quizBody').innerHTML='<p style="font-size:0.73rem;color:var(--ink-faint);margin-bottom:12px">Pergunta '+(qStep+1)+' de '+QS.length+'</p><p style="font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:14px;line-height:1.4">'+q.q+'</p><div style="display:flex;flex-direction:column;gap:8px">'+q.o.map(function(x,i){return '<button onclick="answerQ('+i+')" style="background:var(--paper-dark);border:1px solid var(--rule);border-radius:3px;padding:10px 13px;cursor:pointer;font-size:0.86rem;text-align:left;font-family:var(--sans)">'+x+'</button>';}).join('')+'</div>';}
+function openQuiz(){qStep=0;qScore=0;renderQ();document.getElementById("quizOverlay").classList.add("open");}
+function closeQuiz(){document.getElementById("quizOverlay").classList.remove("open");}
+function renderQ(){if(qStep>=QS.length){showQResult();return;}var q=QS[qStep];document.getElementById("quizBody").innerHTML="<p style=\"font-size:0.73rem;color:var(--ink-faint);margin-bottom:12px\">Pergunta "+(qStep+1)+" de "+QS.length+"</p><p style=\"font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:14px;line-height:1.4\">"+q.q+"</p><div style=\"display:flex;flex-direction:column;gap:8px\">"+q.o.map(function(x,i){return "<button onclick=\"answerQ("+i+")\" style=\"background:var(--paper-dark);border:1px solid var(--rule);border-radius:3px;padding:10px 13px;cursor:pointer;font-size:0.86rem;text-align:left;font-family:var(--sans)\">"+x+"</button>";}).join("")+"</div>";}
 function answerQ(i){qScore+=i;qStep++;renderQ();}
-function showQResult(){var icon,title,text;if(qScore<=3){icon='OK';title='A sua audicao parece estar bem';text='As suas respostas nao indicam sinais significativos.';}else if(qScore<=7){icon='!!';title='Alguns sinais merecem atencao';text='Uma consulta de avaliacao e recomendada.';}else{icon='!';title='Recomendamos uma avaliacao';text='Na maioria dos casos ha solucao.';}document.getElementById('quizBody').innerHTML='<div style="text-align:center"><div style="font-size:2.2rem;margin-bottom:10px">'+icon+'</div><h3 style="font-family:var(--serif);font-size:1.2rem;margin-bottom:9px">'+title+'</h3><p style="font-size:0.86rem;color:var(--ink-light);margin-bottom:18px">'+text+'</p><button onclick="openBooking();closeQuiz()" style="background:var(--accent);color:white;font-family:var(--sans);font-size:0.86rem;font-weight:700;border:none;border-radius:3px;padding:11px;width:100%;cursor:pointer">Marcar consulta gratuita</button></div>';}
-document.getElementById('siteDate').textContent=new Date().toLocaleDateString('pt-PT',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+function showQResult(){var icon,title,text;if(qScore<=3){icon="OK";title="A sua audicao parece estar bem";text="As suas respostas nao indicam sinais significativos.";}else if(qScore<=7){icon="!!";title="Alguns sinais merecem atencao";text="Uma consulta de avaliacao e recomendada.";}else{icon="!";title="Recomendamos uma avaliacao";text="Na maioria dos casos ha solucao.";}document.getElementById("quizBody").innerHTML="<div style=\"text-align:center\"><div style=\"font-size:2.2rem;margin-bottom:10px\">"+icon+"</div><h3 style=\"font-family:var(--serif);font-size:1.2rem;margin-bottom:9px\">"+title+"</h3><p style=\"font-size:0.86rem;color:var(--ink-light);margin-bottom:18px\">"+text+"</p><button onclick=\"openBooking();closeQuiz()\" style=\"background:var(--accent);color:white;font-family:var(--sans);font-size:0.86rem;font-weight:700;border:none;border-radius:3px;padding:11px;width:100%;cursor:pointer\">Marcar consulta gratuita</button></div>";}
+
+document.getElementById("siteDate").textContent=new Date().toLocaleDateString("pt-PT",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
 </script>
 
-<!-- POLÃTICA DE PRIVACIDADE -->
+<!-- POLÃÂTICA DE PRIVACIDADE -->
 <div id="page-privacidade" class="page">
 <div class="main-container"><div class="legal-page">
-<h1>PolÃ­tica de Privacidade</h1>
-<p class="legal-meta">Ãltima actualizaÃ§Ã£o: Abril de 2026 Â· ResponsÃ¡vel: Penguin Style Lda</p>
-<h2>1. IdentificaÃ§Ã£o do ResponsÃ¡vel</h2>
-<p><strong>Penguin Style Lda</strong><br>Rua Dr. Henrique CarvalhÃ£o, Lote 12, Loja 1<br>6000-235 Castelo Branco Â· NIPC: 515167657</p>
+<h1>PolÃÂ­tica de Privacidade</h1>
+<p class="legal-meta">ÃÂltima actualizaÃÂ§ÃÂ£o: Abril de 2026 ÃÂ· ResponsÃÂ¡vel: Penguin Style Lda</p>
+<h2>1. IdentificaÃÂ§ÃÂ£o do ResponsÃÂ¡vel</h2>
+<p><strong>Penguin Style Lda</strong><br>Rua Dr. Henrique CarvalhÃÂ£o, Lote 12, Loja 1<br>6000-235 Castelo Branco ÃÂ· NIPC: 515167657</p>
 <h2>2. Dados Recolhidos</h2>
-<p>Recolhemos: nome completo, nÃºmero de telemÃ³vel e preferÃªncia de horÃ¡rio de contacto, no Ã¢mbito do pedido de agendamento de consulta auditiva gratuita.</p>
+<p>Recolhemos: nome completo, nÃÂºmero de telemÃÂ³vel e preferÃÂªncia de horÃÂ¡rio de contacto, no ÃÂ¢mbito do pedido de agendamento de consulta auditiva gratuita.</p>
 <h2>3. Finalidades</h2>
-<p>Os dados sÃ£o usados exclusivamente para agendamento e confirmaÃ§Ã£o de consultas auditivas gratuitas. NÃ£o sÃ£o utilizados para marketing nÃ£o solicitado nem partilhados com terceiros para fins prÃ³prios destes.</p>
+<p>Os dados sÃÂ£o usados exclusivamente para agendamento e confirmaÃÂ§ÃÂ£o de consultas auditivas gratuitas. NÃÂ£o sÃÂ£o utilizados para marketing nÃÂ£o solicitado nem partilhados com terceiros para fins prÃÂ³prios destes.</p>
 <h2>4. Base Legal (RGPD)</h2>
-<p><strong>Consentimento</strong> (art.Âº 6.Âº, n.Âº 1, al. a) â ao preencher o formulÃ¡rio. <strong>ExecuÃ§Ã£o de prÃ©-contrato</strong> (art.Âº 6.Âº, n.Âº 1, al. b) â para dar seguimento ao pedido.</p>
-<h2>5. ConservaÃ§Ã£o</h2>
-<p>Dados conservados pelo perÃ­odo necessÃ¡rio Ã  prestaÃ§Ã£o do serviÃ§o e no mÃ¡ximo 12 meses apÃ³s o Ãºltimo contacto.</p>
+<p><strong>Consentimento</strong> (art.ÃÂº 6.ÃÂº, n.ÃÂº 1, al. a) Ã¢ÂÂ ao preencher o formulÃÂ¡rio. <strong>ExecuÃÂ§ÃÂ£o de prÃÂ©-contrato</strong> (art.ÃÂº 6.ÃÂº, n.ÃÂº 1, al. b) Ã¢ÂÂ para dar seguimento ao pedido.</p>
+<h2>5. ConservaÃÂ§ÃÂ£o</h2>
+<p>Dados conservados pelo perÃÂ­odo necessÃÂ¡rio ÃÂ  prestaÃÂ§ÃÂ£o do serviÃÂ§o e no mÃÂ¡ximo 12 meses apÃÂ³s o ÃÂºltimo contacto.</p>
 <h2>6. Partilha de Dados</h2>
-<p>Os dados poderÃ£o ser partilhados com o Centro PortuguÃªs Auditivo, exclusivamente para fins de agendamento. Esta entidade estÃ¡ igualmente sujeita ao RGPD.</p>
+<p>Os dados poderÃÂ£o ser partilhados com o Centro PortuguÃÂªs Auditivo, exclusivamente para fins de agendamento. Esta entidade estÃÂ¡ igualmente sujeita ao RGPD.</p>
 <h2>7. Os seus Direitos</h2>
-<p>Tem direito de acesso, rectificaÃ§Ã£o, apagamento, limitaÃ§Ã£o, portabilidade, oposiÃ§Ã£o e retirada do consentimento. Contacte-nos pelos dados acima. Pode tambÃ©m reclamar junto da <strong>CNPD</strong> (www.cnpd.pt).</p>
-<h2>8. SeguranÃ§a e Cookies</h2>
-<p>Adoptamos medidas tÃ©cnicas e organizativas adequadas para proteger os seus dados. Este website nÃ£o utiliza cookies de rastreamento ou publicidade.</p>
+<p>Tem direito de acesso, rectificaÃÂ§ÃÂ£o, apagamento, limitaÃÂ§ÃÂ£o, portabilidade, oposiÃÂ§ÃÂ£o e retirada do consentimento. Contacte-nos pelos dados acima. Pode tambÃÂ©m reclamar junto da <strong>CNPD</strong> (www.cnpd.pt).</p>
+<h2>8. SeguranÃÂ§a e Cookies</h2>
+<p>Adoptamos medidas tÃÂ©cnicas e organizativas adequadas para proteger os seus dados. Este website nÃÂ£o utiliza cookies de rastreamento ou publicidade.</p>
 </div></div>
 </div>
 
-<!-- TERMOS E CONDIÃÃES -->
+<!-- TERMOS E CONDIÃÂÃÂES -->
 <div id="page-termos" class="page">
 <div class="main-container"><div class="legal-page">
-<h1>Termos e CondiÃ§Ãµes de UtilizaÃ§Ã£o</h1>
-<p class="legal-meta">Ãltima actualizaÃ§Ã£o: Abril de 2026 Â· Penguin Style Lda</p>
-<h2>1. IdentificaÃ§Ã£o</h2>
-<p><strong>Penguin Style Lda</strong>, Rua Dr. Henrique CarvalhÃ£o, Lote 12, Loja 1, 6000-235 Castelo Branco Â· NIPC 515167657</p>
-<h2>2. AceitaÃ§Ã£o</h2>
-<p>O acesso e utilizaÃ§Ã£o deste website implica a aceitaÃ§Ã£o integral destes Termos. Caso nÃ£o concorde, abstenha-se de utilizar o website.</p>
+<h1>Termos e CondiÃÂ§ÃÂµes de UtilizaÃÂ§ÃÂ£o</h1>
+<p class="legal-meta">ÃÂltima actualizaÃÂ§ÃÂ£o: Abril de 2026 ÃÂ· Penguin Style Lda</p>
+<h2>1. IdentificaÃÂ§ÃÂ£o</h2>
+<p><strong>Penguin Style Lda</strong>, Rua Dr. Henrique CarvalhÃÂ£o, Lote 12, Loja 1, 6000-235 Castelo Branco ÃÂ· NIPC 515167657</p>
+<h2>2. AceitaÃÂ§ÃÂ£o</h2>
+<p>O acesso e utilizaÃÂ§ÃÂ£o deste website implica a aceitaÃÂ§ÃÂ£o integral destes Termos. Caso nÃÂ£o concorde, abstenha-se de utilizar o website.</p>
 <h2>3. Objeto</h2>
-<p>Este website divulga informaÃ§Ã£o editorial sobre saÃºde auditiva e facilita o agendamento de consultas auditivas gratuitas em parceria com o Centro PortuguÃªs Auditivo. A informaÃ§Ã£o publicada tem carÃ¡cter meramente informativo e nÃ£o substitui aconselhamento mÃ©dico especializado.</p>
+<p>Este website divulga informaÃÂ§ÃÂ£o editorial sobre saÃÂºde auditiva e facilita o agendamento de consultas auditivas gratuitas em parceria com o Centro PortuguÃÂªs Auditivo. A informaÃÂ§ÃÂ£o publicada tem carÃÂ¡cter meramente informativo e nÃÂ£o substitui aconselhamento mÃÂ©dico especializado.</p>
 <h2>4. Consultas Gratuitas</h2>
-<p>As consultas auditivas sÃ£o inteiramente gratuitas e sem compromisso de compra. O agendamento Ã© feito por contacto telefÃ³nico apÃ³s submissÃ£o do formulÃ¡rio.</p>
+<p>As consultas auditivas sÃÂ£o inteiramente gratuitas e sem compromisso de compra. O agendamento ÃÂ© feito por contacto telefÃÂ³nico apÃÂ³s submissÃÂ£o do formulÃÂ¡rio.</p>
 <h2>5. Propriedade Intelectual</h2>
-<p>Todo o conteÃºdo editorial Ã© propriedade do Operador ou dos seus fornecedores e estÃ¡ protegido pela legislaÃ§Ã£o de direito de autor. Ã proibida a reproduÃ§Ã£o sem autorizaÃ§Ã£o prÃ©via e escrita.</p>
+<p>Todo o conteÃÂºdo editorial ÃÂ© propriedade do Operador ou dos seus fornecedores e estÃÂ¡ protegido pela legislaÃÂ§ÃÂ£o de direito de autor. ÃÂ proibida a reproduÃÂ§ÃÂ£o sem autorizaÃÂ§ÃÂ£o prÃÂ©via e escrita.</p>
 <h2>6. Responsabilidade</h2>
-<p>O Operador nÃ£o garante a ausÃªncia de erros no conteÃºdo publicado e nÃ£o se responsabiliza por danos resultantes da utilizaÃ§Ã£o do website.</p>
-<h2>7. Lei AplicÃ¡vel e Foro</h2>
-<p>Estes Termos sÃ£o regidos pela lei portuguesa. Ã competente o tribunal da comarca de Castelo Branco. Para litÃ­gios de consumo: plataforma europeia de resoluÃ§Ã£o em linha em <strong>ec.europa.eu/consumers/odr</strong>.</p>
+<p>O Operador nÃÂ£o garante a ausÃÂªncia de erros no conteÃÂºdo publicado e nÃÂ£o se responsabiliza por danos resultantes da utilizaÃÂ§ÃÂ£o do website.</p>
+<h2>7. Lei AplicÃÂ¡vel e Foro</h2>
+<p>Estes Termos sÃÂ£o regidos pela lei portuguesa. ÃÂ competente o tribunal da comarca de Castelo Branco. Para litÃÂ­gios de consumo: plataforma europeia de resoluÃÂ§ÃÂ£o em linha em <strong>ec.europa.eu/consumers/odr</strong>.</p>
 </div></div>
 </div>
 </body>
