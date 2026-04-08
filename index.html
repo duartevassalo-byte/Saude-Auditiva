@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#141414;--ink-mid:#3a3a3a;--ink-light:#6b6b6b;--ink-faint:#9e9e9e;--rule:#d4d0c8;--rule-light:#e8e5de;--paper:#f9f7f3;--paper-dark:#f0ede6;--accent:#1a5c3a;--accent-mid:#236b46;--accent-light:#e8f3ec;--red:#c0392b;--serif:'Libre Baskerville',Georgia,serif;--sans:'Libre Franklin',sans-serif}
+:root{--ink:#141414;--ink-mid:#3a3a3a;--ink-light:#6b6b6b;--ink-faint:#9e9e9e;--rule:#d4d0c8;--rule-light:#e8e5de;--paper:#f9f7f3;--paper-dark:#f0ede6;--accent:#1a5c3a;--accent-light:#e8f3ec;--red:#c0392b;--serif:'Libre Baskerville',Georgia,serif;--sans:'Libre Franklin',sans-serif}
 html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6}a{color:inherit;text-decoration:none}
 .masthead{border-bottom:3px solid var(--ink);padding:0 24px;background:var(--paper);position:sticky;top:0;z-index:50}
 .masthead-top{display:flex;align-items:center;justify-content:space-between;padding:12px 0 8px;border-bottom:1px solid var(--rule)}
@@ -79,18 +79,27 @@ html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper)
 .card-meta{font-size:0.68rem;color:var(--ink-faint)}
 .card-read-btn{font-size:0.7rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);cursor:pointer;background:none;border:none;font-family:var(--sans);padding:0;display:inline-flex;align-items:center;gap:4px;margin-top:7px}
 .card-read-btn::after{content:'→'}
-.cat-index-section{padding:24px 0;border-bottom:2px solid var(--ink)}
-.cat-index-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;padding-bottom:7px;border-bottom:2px solid var(--ink)}
+/* SECÇÕES DE CATEGORIA NO ÍNDICE */
+.cat-index-section{padding:28px 0;border-bottom:2px solid var(--ink)}
+.cat-index-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
 .cat-index-header h2{font-family:var(--sans);font-size:0.73rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
 .cat-ver-mais{font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);cursor:pointer;background:none;border:none;font-family:var(--sans);padding:0}
-.cat-index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.cat-idx-card{display:grid;grid-template-columns:80px 1fr;gap:12px;cursor:pointer;padding-bottom:12px;border-bottom:1px solid var(--rule-light)}
-.cat-idx-card:last-child{border-bottom:none;padding-bottom:0}
+.cat-index-layout{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start}
+.cat-index-intro{padding-right:0}
+.cat-index-intro h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;line-height:1.2;margin-bottom:10px;color:var(--ink)}
+.cat-index-intro p{font-size:0.88rem;color:var(--ink-mid);line-height:1.75;margin-bottom:10px}
+.cat-index-intro .cat-cta-btn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:white;font-family:var(--sans);font-size:0.78rem;font-weight:700;border:none;border-radius:2px;padding:10px 16px;cursor:pointer;margin-top:6px}
+.cat-index-articles{}
+.cat-idx-card{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule-light);cursor:pointer;align-items:start}
+.cat-idx-card:first-child{padding-top:0}
+.cat-idx-card:last-child{border-bottom:none}
 .cat-idx-card:hover .cat-idx-title{color:var(--accent)}
-.cat-idx-img{width:80px;height:54px;object-fit:cover;border-radius:2px;background:var(--paper-dark)}
-.cat-idx-kick{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-.cat-idx-title{font-family:var(--serif);font-size:0.88rem;font-weight:700;line-height:1.25;color:var(--ink);transition:color 0.15s}
-.cat-idx-meta{font-size:0.65rem;color:var(--ink-faint);margin-top:3px}
+.cat-idx-img{width:72px;height:48px;object-fit:cover;border-radius:2px;background:var(--paper-dark)}
+.cat-idx-kick{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.cat-idx-title{font-family:var(--serif);font-size:0.86rem;font-weight:700;line-height:1.25;color:var(--ink);transition:color 0.15s}
+.cat-idx-meta{font-size:0.64rem;color:var(--ink-faint);margin-top:2px}
+.cat-idx-empty{font-size:0.82rem;color:var(--ink-faint);font-style:italic;padding:8px 0}
+/* CHECKLIST */
 .checklist-section{display:grid;grid-template-columns:1fr 320px;gap:36px;padding:26px 0;border-bottom:2px solid var(--ink);align-items:start}
 .section-kicker{font-size:0.66rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .checklist-content h2{font-family:var(--serif);font-size:1.45rem;font-weight:700;line-height:1.2;margin-bottom:10px}
@@ -110,18 +119,45 @@ html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper)
 .info-steps li::before{content:counter(steps);width:20px;height:20px;background:var(--ink);color:white;font-family:var(--serif);font-size:0.7rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .info-btn{width:100%;background:var(--ink);color:white;font-family:var(--sans);font-size:0.78rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;border:none;padding:11px;border-radius:2px;cursor:pointer;transition:background 0.15s}
 .info-btn:hover{background:var(--accent)}
-.cat-section{padding:28px 0;border-bottom:2px solid var(--ink)}
-.cat-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding-bottom:7px;border-bottom:2px solid var(--ink)}
-.cat-header h2{font-family:var(--sans);font-size:0.73rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
-.cat-articles{display:flex;flex-direction:column;gap:0}
-.cat-article-row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule-light);cursor:pointer;align-items:start}
-.cat-article-row:last-child{border-bottom:none}
-.cat-article-row:hover .cat-art-title{color:var(--accent)}
-.cat-art-img{width:120px;height:80px;object-fit:cover;border-radius:2px}
-.cat-art-kicker{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.cat-art-title{font-family:var(--serif);font-size:0.95rem;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:5px;transition:color 0.15s}
-.cat-art-deck{font-size:0.8rem;color:var(--ink-light);line-height:1.5;margin-bottom:6px}
-.cat-art-meta{font-size:0.68rem;color:var(--ink-faint)}
+/* PÁGINA DE CATEGORIA */
+.cat-page{max-width:1200px;margin:0 auto;padding:0 24px}
+.cat-page-hero{padding:32px 0 24px;border-bottom:2px solid var(--ink);margin-bottom:28px}
+.cat-page-kicker{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.cat-page-title{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.1;margin-bottom:14px}
+.cat-page-intro{font-size:0.96rem;color:var(--ink-mid);line-height:1.8;max-width:720px;margin-bottom:20px}
+.cat-page-layout{display:grid;grid-template-columns:1fr 280px;gap:48px;padding-bottom:40px}
+.cat-page-main{}
+.cat-page-editorial{font-size:0.92rem;color:var(--ink-mid);line-height:1.8;margin-bottom:24px}
+.cat-page-editorial h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);margin:22px 0 9px}
+.cat-page-editorial p{margin-bottom:12px}
+.cat-page-editorial ul{margin:0 0 12px 20px}
+.cat-page-editorial ul li{margin-bottom:6px}
+.cat-page-editorial blockquote{border-left:4px solid var(--accent);padding:12px 16px;background:var(--paper-dark);margin:18px 0;font-family:var(--serif);font-style:italic;font-size:0.96rem;color:var(--ink-mid)}
+.highlight-box{background:var(--accent-light);border:1px solid rgba(26,92,58,0.15);padding:18px 20px;border-radius:2px;margin:20px 0}
+.highlight-box .hb-label{font-size:0.64rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.highlight-box p{font-size:0.86rem;color:var(--ink-mid);line-height:1.65;margin:0}
+.cat-articles-title{font-family:var(--sans);font-size:0.73rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;padding-bottom:7px;border-bottom:2px solid var(--ink)}
+.cat-art-list{display:flex;flex-direction:column;gap:0}
+.cat-art-row{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule-light);cursor:pointer;align-items:start}
+.cat-art-row:last-child{border-bottom:none}
+.cat-art-row:hover .car-title{color:var(--accent)}
+.car-img{width:100px;height:65px;object-fit:cover;border-radius:2px;background:var(--paper-dark)}
+.car-kick{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.car-title{font-family:var(--serif);font-size:0.92rem;font-weight:700;line-height:1.25;color:var(--ink);transition:color 0.15s}
+.car-deck{font-size:0.78rem;color:var(--ink-light);line-height:1.45;margin-top:3px}
+.car-meta{font-size:0.64rem;color:var(--ink-faint);margin-top:3px}
+.cat-empty{font-size:0.84rem;color:var(--ink-faint);font-style:italic;padding:16px 0}
+.cat-page-sidebar{}
+.aside-sticky{position:sticky;top:90px}
+.aside-cta{background:var(--ink);color:white;padding:20px 16px;border-radius:2px;margin-bottom:20px}
+.aside-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:7px}
+.aside-cta h3{font-family:var(--serif);font-size:1rem;line-height:1.3;margin-bottom:7px}
+.aside-cta>p{font-size:0.76rem;color:rgba(255,255,255,0.5);line-height:1.5;margin-bottom:12px}
+.aside-form input{width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:3px;padding:8px 10px;color:white;font-family:var(--sans);font-size:0.82rem;margin-bottom:6px;outline:none}
+.aside-form button{width:100%;background:var(--accent);color:white;font-family:var(--sans);font-size:0.8rem;font-weight:700;border:none;border-radius:3px;padding:9px;cursor:pointer}
+.aside-priv{font-size:0.62rem;color:rgba(255,255,255,0.22);text-align:center;margin-top:6px}
+.aside-ty{display:none;text-align:center;font-size:0.82rem;color:#7dccaa;font-weight:600;padding:4px 0}
+/* ARTIGO COMPLETO */
 .article-page{max-width:1200px;margin:0 auto;padding:0 24px}
 .article-layout{display:grid;grid-template-columns:1fr 300px;gap:48px;padding:28px 0}
 .article-main{min-width:0}
@@ -134,7 +170,6 @@ html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper)
 .article-content{font-size:0.94rem;color:var(--ink-mid);line-height:1.8}
 .article-content p{margin-bottom:16px}
 .article-content h3{font-family:var(--serif);font-size:1.18rem;font-weight:700;color:var(--ink);margin:26px 0 11px}
-.article-content h4{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);margin:20px 0 8px}
 .article-content blockquote{border-left:4px solid var(--accent);padding:13px 17px;background:var(--paper-dark);margin:22px 0;font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--ink-mid)}
 .article-inline-cta{background:var(--ink);color:white;padding:22px;border-radius:2px;margin:26px 0}
 .article-inline-cta h4{font-family:var(--serif);font-size:1.08rem;margin-bottom:5px}
@@ -144,20 +179,21 @@ html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper)
 .inline-row button{background:var(--accent);color:white;font-family:var(--sans);font-size:0.8rem;font-weight:700;border:none;border-radius:3px;padding:9px 14px;cursor:pointer;white-space:nowrap}
 .inline-cta-ty{display:none;font-size:0.86rem;font-weight:600;color:#7dccaa;margin-top:9px}
 .article-sidebar{padding-top:28px}
-.aside-cta{background:var(--ink);color:white;padding:20px 16px;border-radius:2px;margin-bottom:20px;position:sticky;top:90px}
-.aside-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:7px}
-.aside-cta h3{font-family:var(--serif);font-size:1rem;line-height:1.3;margin-bottom:7px}
-.aside-cta>p{font-size:0.76rem;color:rgba(255,255,255,0.5);line-height:1.5;margin-bottom:12px}
-.aside-form input{width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:3px;padding:8px 10px;color:white;font-family:var(--sans);font-size:0.82rem;margin-bottom:6px;outline:none}
-.aside-form button{width:100%;background:var(--accent);color:white;font-family:var(--sans);font-size:0.8rem;font-weight:700;border:none;border-radius:3px;padding:9px;cursor:pointer}
-.aside-priv{font-size:0.62rem;color:rgba(255,255,255,0.22);text-align:center;margin-top:6px}
-.aside-ty{display:none;text-align:center;font-size:0.82rem;color:#7dccaa;font-weight:600;padding:4px 0}
 .related-title{font-size:0.66rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
 .related-item{padding:10px 0;border-bottom:1px solid var(--rule-light);cursor:pointer}
 .related-item:last-child{border-bottom:none}
 .related-item:hover .related-item-title{color:var(--accent)}
 .related-item-cat{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
 .related-item-title{font-family:var(--serif);font-size:0.86rem;line-height:1.3;color:var(--ink);transition:color 0.15s}
+/* LEGAL */
+.legal-page{max-width:760px;margin:0 auto;padding:36px 24px 60px}
+.legal-page h1{font-family:var(--serif);font-size:1.8rem;font-weight:700;margin-bottom:6px}
+.legal-page .legal-meta{font-size:0.78rem;color:var(--ink-light);margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.legal-page h2{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin:28px 0 10px;color:var(--ink)}
+.legal-page p{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin-bottom:12px}
+.legal-page ul{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin:0 0 12px 20px}
+.legal-page ul li{margin-bottom:6px}
+/* OVERLAY */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
 .overlay.open{display:flex}
 .modal{background:var(--paper);max-width:460px;width:100%;border-radius:4px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.3);animation:slideUp 0.3s ease}
@@ -177,13 +213,6 @@ html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper)
 .modal-ty h3{font-family:var(--serif);font-size:1.18rem;margin-bottom:7px}
 .modal-ty p{font-size:0.84rem;color:var(--ink-light);line-height:1.6;margin-bottom:14px}
 .modal-ty-close{background:var(--paper-dark);border:1px solid var(--rule);border-radius:3px;padding:8px 18px;font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--ink-mid);cursor:pointer}
-.legal-page{max-width:760px;margin:0 auto;padding:36px 24px 60px}
-.legal-page h1{font-family:var(--serif);font-size:1.8rem;font-weight:700;margin-bottom:6px}
-.legal-page .legal-meta{font-size:0.78rem;color:var(--ink-light);margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
-.legal-page h2{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin:28px 0 10px;color:var(--ink)}
-.legal-page p{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin-bottom:12px}
-.legal-page ul{font-size:0.9rem;color:var(--ink-mid);line-height:1.75;margin:0 0 12px 20px}
-.legal-page ul li{margin-bottom:6px}
 footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
 .footer-name{font-family:var(--serif);font-size:1.05rem;font-weight:700;margin-bottom:4px}
@@ -192,22 +221,22 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 .footer-links a{font-size:0.74rem;color:var(--ink-light);border-bottom:1px solid var(--rule);cursor:pointer}
 .loading-msg{font-size:0.82rem;color:var(--ink-faint);padding:20px 0;text-align:center}
 @media(max-width:900px){
-.lead-section,.checklist-section,.article-layout{grid-template-columns:1fr}
+.lead-section,.checklist-section,.article-layout,.cat-page-layout,.cat-index-layout{grid-template-columns:1fr}
 .lead-article{padding-right:0;border-right:none;padding-bottom:20px;border-bottom:1px solid var(--rule)}
 .lead-sidebar{padding-left:0;padding-top:20px}
 .lead-body{column-count:1}
 .articles-grid{grid-template-columns:1fr 1fr}
-.cat-index-grid{grid-template-columns:1fr 1fr}
-.article-sidebar{display:none}
+.article-sidebar,.cat-page-sidebar{display:none}
 .inline-row{grid-template-columns:1fr}
 .stats-row{grid-template-columns:repeat(2,1fr)}
 .masthead-top{flex-direction:column;gap:6px;text-align:center}
 .site-tagline{text-align:center;max-width:100%}
 }
-@media(max-width:600px){.articles-grid{grid-template-columns:1fr}.cat-article-row{grid-template-columns:1fr}.cat-art-img{display:none}.cat-index-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.articles-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header class="masthead"><div class="main-container">
 <div class="masthead-top">
 <span class="site-date" id="siteDate"></span>
@@ -216,19 +245,22 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 </div>
 <nav class="masthead-nav" id="mainNav">
 <a onclick="showPage('home')" id="nav-home" class="active">Início</a>
-<a onclick="showCat('Perda Auditiva')" id="nav-perda">Perda Auditiva</a>
-<a onclick="showCat('Sinais de Alerta')" id="nav-sinais">Sinais de Alerta</a>
-<a onclick="showCat('Prevenção')" id="nav-prev">Prevenção</a>
-<a onclick="showCat('Família')" id="nav-familia">Família</a>
-<a onclick="showCat('Aparelhos')" id="nav-ap">Aparelhos</a>
+<a onclick="showCat('perda')" id="nav-perda">Perda Auditiva</a>
+<a onclick="showCat('sinais')" id="nav-sinais">Sinais de Alerta</a>
+<a onclick="showCat('prevencao')" id="nav-prev">Prevenção</a>
+<a onclick="showCat('familia')" id="nav-familia">Família</a>
+<a onclick="showCat('aparelhos')" id="nav-ap">Aparelhos</a>
 <a onclick="openBooking()" style="color:var(--accent);font-weight:700">Consulta Gratuita</a>
 </nav>
 </div></header>
+
 <div class="breaking-bar">
 <span class="breaking-label">Sabia que</span>
 <span class="breaking-text">1 em cada 3 pessoas acima dos 65 anos tem algum grau de perda auditiva — e a maioria não sabe.</span>
 <span class="breaking-cta" onclick="openBooking()">Agendar consulta gratuita →</span>
 </div>
+
+<!-- HOME -->
 <div id="page-home" class="page active"><div class="main-container">
 <div class="stats-row">
 <div class="stat-cell"><span class="big-num">1<em> em 3</em></span><p>pessoas com +65 anos tem perda auditiva</p></div>
@@ -248,7 +280,7 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <div class="stat-block"><span class="number">7</span><span class="label">anos em média entre os primeiros sintomas e o pedido de ajuda.</span></div>
 <p>As razões são várias: negação, estigma social e falta de informação.</p>
 </div>
-<button class="read-more-btn" onclick="showCat('Perda Auditiva')">Ler mais artigos</button>
+<button class="read-more-btn" onclick="showCat('perda')">Ler mais artigos</button>
 </article>
 <aside class="lead-sidebar">
 <p class="sidebar-title">Marque a sua consulta</p>
@@ -261,7 +293,7 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <button type="submit">Quero ser contactado →</button>
 </form>
 <div class="ty-state" id="sbTy"><div class="ty-icon">✓</div><p>Obrigado! Entramos em contacto brevemente.</p></div>
-<p class="cta-privacy">Dados confidenciais. Consulte a nossa <a onclick="showPage('privacidade')" style="color:rgba(255,255,255,0.5);text-decoration:underline;cursor:pointer">Política de Privacidade</a>.</p>
+<p class="cta-privacy">Dados confidenciais. <a onclick="showPage('privacidade')" style="color:rgba(255,255,255,0.5);text-decoration:underline;cursor:pointer">Política de Privacidade</a>.</p>
 </div>
 <div class="quiz-card">
 <p class="quiz-label">🎯 Teste rápido</p>
@@ -274,7 +306,78 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <div class="section-header"><h2>Artigos recentes</h2></div>
 <div class="articles-grid" id="recentGrid"><p class="loading-msg">A carregar...</p></div>
 </div>
-<div id="cat-index-sections"></div>
+
+<!-- SECÇÕES DE CATEGORIA NO ÍNDICE -->
+<div class="cat-index-section">
+<div class="cat-index-header"><h2>Perda Auditiva</h2><button class="cat-ver-mais" onclick="showCat('perda')">Ver todos →</button></div>
+<div class="cat-index-layout">
+<div class="cat-index-intro">
+<h3>O que é a perda auditiva e porque acontece?</h3>
+<p>A perda auditiva é uma redução da capacidade de ouvir sons, podendo ser parcial ou total, afetar um ou ambos os ouvidos. É uma das condições de saúde mais prevalentes em Portugal, afetando cerca de 20% da população adulta — e mais de um terço das pessoas com mais de 65 anos.</p>
+<p>Existem três tipos principais: a <strong>perda condutiva</strong> (problema no ouvido externo ou médio, frequentemente tratável), a <strong>perda neurossensorial</strong> (dano nas células ciliadas do ouvido interno, geralmente permanente) e a <strong>perda mista</strong> (combinação de ambas). A maioria dos casos em adultos mais velhos é neurossensorial, associada ao envelhecimento natural — chamada presbiacusia.</p>
+<p>O envelhecimento é a causa mais comum, mas o ruído intenso, determinados medicamentos ototóxicos, infeções e doenças como o diabetes também contribuem para a degradação auditiva.</p>
+<button class="cat-cta-btn" onclick="openBooking()">Agendar avaliação gratuita →</button>
+</div>
+<div class="cat-index-articles" id="cat-arts-perda"><p class="cat-idx-empty">A carregar artigos...</p></div>
+</div>
+</div>
+
+<div class="cat-index-section">
+<div class="cat-index-header"><h2>Sinais de Alerta</h2><button class="cat-ver-mais" onclick="showCat('sinais')">Ver todos →</button></div>
+<div class="cat-index-layout">
+<div class="cat-index-intro">
+<h3>Os sinais que não deve ignorar</h3>
+<p>A perda auditiva instala-se de forma gradual, o que torna difícil perceber quando começa a interferir na vida quotidiana. Muitas pessoas adaptam-se inconscientemente — pedem mais vezes que repitam, aumentam o volume, evitam situações sociais — sem reconhecer que estão a compensar uma limitação auditiva.</p>
+<p>Os sinais mais comuns incluem: dificuldade em perceber conversas em locais com ruído de fundo, necessidade de aumentar o volume da televisão para além do habitual, frequente incompreensão de palavras ao telefone, sensação de que os outros "falam muito baixo" ou "não articulam bem" e zumbidos persistentes nos ouvidos (acufenos).</p>
+<p>Se identificar dois ou mais destes sinais no seu dia a dia, uma avaliação auditiva é recomendada — especialmente por serem totalmente gratuitos os testes de rastreio disponíveis.</p>
+<button class="cat-cta-btn" onclick="openBooking()">Fazer rastreio auditivo gratuito →</button>
+</div>
+<div class="cat-index-articles" id="cat-arts-sinais"><p class="cat-idx-empty">A carregar artigos...</p></div>
+</div>
+</div>
+
+<div class="cat-index-section">
+<div class="cat-index-header"><h2>Prevenção</h2><button class="cat-ver-mais" onclick="showCat('prevencao')">Ver todos →</button></div>
+<div class="cat-index-layout">
+<div class="cat-index-intro">
+<h3>Como proteger a sua audição ao longo da vida</h3>
+<p>Embora a presbiacusia associada ao envelhecimento seja em grande medida inevitável, muitos casos de perda auditiva podem ser prevenidos ou retardados com hábitos adequados. A OMS estima que mais de 1 bilião de jovens em todo o mundo está em risco de perda auditiva prevenível devido a exposição excessiva ao ruído.</p>
+<p>As medidas preventivas mais eficazes incluem usar proteção auditiva em ambientes ruidosos (concertos, obras, maquinaria pesada), limitar o tempo de exposição a sons altos, manter o volume de auscultadores abaixo dos 60% da capacidade máxima, e realizar rastreios auditivos periódicos a partir dos 50 anos.</p>
+<p>Controlar doenças sistémicas como a diabetes e a hipertensão também contribui para a saúde auditiva, uma vez que ambas estão associadas a maior risco de perda de audição.</p>
+<button class="cat-cta-btn" onclick="openBooking()">Agendar avaliação preventiva →</button>
+</div>
+<div class="cat-index-articles" id="cat-arts-prevencao"><p class="cat-idx-empty">A carregar artigos...</p></div>
+</div>
+</div>
+
+<div class="cat-index-section">
+<div class="cat-index-header"><h2>Família</h2><button class="cat-ver-mais" onclick="showCat('familia')">Ver todos →</button></div>
+<div class="cat-index-layout">
+<div class="cat-index-intro">
+<h3>Quando é um familiar que precisa de ajuda</h3>
+<p>É frequente que sejam os familiares a notar os primeiros sinais de perda auditiva antes do próprio — e igualmente frequente que a pessoa afetada resista em reconhecê-los. Esta resistência é compreensível: a perda auditiva está associada, cultural e emocionalmente, ao envelhecimento, e aceitar essa realidade pode ser difícil.</p>
+<p>Abordar o assunto com sensibilidade é essencial. Em vez de criticar ("Tens sempre o volume demasiado alto"), opte por observações neutras e concretas ("Reparei que estás a ter dificuldades nas conversas em família — talvez valha a pena fazer um teste"). Evite infantilizar ou pressionar.</p>
+<p>Ofereça-se para acompanhar a consulta de avaliação — o apoio familiar aumenta significativamente a probabilidade de adesão ao tratamento.</p>
+<button class="cat-cta-btn" onclick="openBooking()">Marcar consulta para familiar →</button>
+</div>
+<div class="cat-index-articles" id="cat-arts-familia"><p class="cat-idx-empty">A carregar artigos...</p></div>
+</div>
+</div>
+
+<div class="cat-index-section">
+<div class="cat-index-header"><h2>Aparelhos Auditivos</h2><button class="cat-ver-mais" onclick="showCat('aparelhos')">Ver todos →</button></div>
+<div class="cat-index-layout">
+<div class="cat-index-intro">
+<h3>Tudo o que deve saber sobre aparelhos auditivos</h3>
+<p>Os aparelhos auditivos modernos são dispositivos sofisticados, muito diferentes dos primeiros modelos volumosos e com som metálico. As tecnologias actuais oferecem amplificação selectiva (que reforça as frequências onde há perda sem distorcer as restantes), conectividade Bluetooth com telemóveis e televisões, cancelamento de ruído de fundo e versões praticamente invisíveis.</p>
+<p>Existem vários tipos: retroauricular (BTE), intracanal (ITC), completamente intracanal (CIC) e os mais recentes modelos RIC/RITE com fio fino e altifalante no canal auditivo. A escolha depende do grau e tipo de perda auditiva, da anatomia do ouvido e das preferências do utilizador.</p>
+<p>A adaptação a um aparelho auditivo demora tempo — geralmente entre 4 a 6 semanas para adaptação completa. A maioria dos utilizadores relata melhoria significativa na qualidade de vida, relações sociais e saúde mental após a adaptação.</p>
+<button class="cat-cta-btn" onclick="openBooking()">Conhecer as opções disponíveis →</button>
+</div>
+<div class="cat-index-articles" id="cat-arts-aparelhos"><p class="cat-idx-empty">A carregar artigos...</p></div>
+</div>
+</div>
+
 <div class="checklist-section">
 <div class="checklist-content">
 <p class="section-kicker">Autoavaliação</p>
@@ -301,15 +404,21 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 </div>
 </div>
 </div></div>
-<div id="page-cat" class="page"><div class="main-container">
-<div class="cat-section">
-<div class="cat-header"><h2 id="catTitle">Categoria</h2><span style="font-size:0.72rem;color:var(--ink-faint)" id="catCount"></span></div>
-<div class="cat-articles" id="catList"></div>
+
+<!-- PÁGINAS DE CATEGORIA (dinâmicas) -->
+<div id="page-cat" class="page"><div class="cat-page">
+<div class="cat-page-hero">
+<p class="cat-page-kicker" id="catKicker"></p>
+<h1 class="cat-page-title" id="catTitle"></h1>
+<p class="cat-page-intro" id="catIntro"></p>
 </div>
-</div></div>
-<div id="page-article" class="page"><div class="article-page"><div class="article-layout">
-<main class="article-main" id="articleMain"></main>
-<aside class="article-sidebar">
+<div class="cat-page-layout">
+<div class="cat-page-main">
+<div class="cat-page-editorial" id="catEditorial"></div>
+<p class="cat-articles-title" id="catArtsTitle"></p>
+<div class="cat-art-list" id="catList"></div>
+</div>
+<aside class="cat-page-sidebar"><div class="aside-sticky">
 <div class="aside-cta">
 <p class="aside-label">Serviço gratuito</p>
 <span class="free-badge" style="font-size:0.62rem;margin-bottom:8px;display:inline-block">✓</span>
@@ -323,9 +432,37 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <div class="aside-ty" id="asideTy">✓ Entraremos em contacto!</div>
 <p class="aside-priv">Dados confidenciais.</p>
 </div>
-<div class="related-articles"><p class="related-title">Outros artigos</p><div id="relatedList"></div></div>
+<div class="quiz-card">
+<p class="quiz-label">🎯 Teste rápido</p>
+<h4>Terá problemas de audição sem saber?</h4>
+<button class="quiz-btn" onclick="openQuiz()">Responda a 5 perguntas →</button>
+</div>
+</div></aside>
+</div>
+</div></div>
+
+<!-- ARTIGO COMPLETO -->
+<div id="page-article" class="page"><div class="article-page"><div class="article-layout">
+<main class="article-main" id="articleMain"></main>
+<aside class="article-sidebar">
+<div class="aside-cta" style="position:sticky;top:90px">
+<p class="aside-label">Serviço gratuito</p>
+<span class="free-badge" style="font-size:0.62rem;margin-bottom:8px;display:inline-block">✓</span>
+<h3>Consulta auditiva gratuita</h3>
+<p>Avaliação completa por um especialista.</p>
+<form class="aside-form" id="asideForm2">
+<input type="text" id="asideNome2" placeholder="O seu nome" required>
+<input type="tel" id="asideTel2" placeholder="Telemóvel" required>
+<button type="submit">Quero ser contactado →</button>
+</form>
+<div class="aside-ty" id="asideTy2">✓ Entraremos em contacto!</div>
+<p class="aside-priv">Dados confidenciais.</p>
+</div>
+<div class="related-articles" style="margin-top:20px"><p class="related-title">Outros artigos</p><div id="relatedList"></div></div>
 </aside>
 </div></div></div>
+
+<!-- PRIVACIDADE -->
 <div id="page-privacidade" class="page"><div class="main-container"><div class="legal-page">
 <h1>Política de Privacidade</h1>
 <p class="legal-meta">Última actualização: Abril de 2026 · Responsável: Penguin Style Lda</p>
@@ -340,12 +477,14 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <h2>5. Conservação</h2>
 <p>Dados conservados pelo período necessário à prestação do serviço e no máximo 12 meses após o último contacto.</p>
 <h2>6. Partilha de Dados</h2>
-<p>Os dados poderão ser partilhados com o Centro Português Auditivo, exclusivamente para fins de agendamento. Esta entidade está igualmente sujeita ao RGPD.</p>
+<p>Os dados poderão ser partilhados com o Centro Português Auditivo, exclusivamente para fins de agendamento.</p>
 <h2>7. Os seus Direitos</h2>
-<p>Tem direito de acesso, rectificação, apagamento, limitação, portabilidade, oposição e retirada do consentimento. Pode também reclamar junto da <strong>CNPD</strong> (www.cnpd.pt).</p>
+<p>Tem direito de acesso, rectificação, apagamento, limitação, portabilidade, oposição e retirada do consentimento. Pode reclamar junto da <strong>CNPD</strong> (www.cnpd.pt).</p>
 <h2>8. Segurança e Cookies</h2>
 <p>Adoptámos medidas técnicas e organizativas adequadas. Este website não utiliza cookies de rastreamento ou publicidade.</p>
 </div></div></div>
+
+<!-- TERMOS -->
 <div id="page-termos" class="page"><div class="main-container"><div class="legal-page">
 <h1>Termos e Condições de Utilização</h1>
 <p class="legal-meta">Última actualização: Abril de 2026 · Penguin Style Lda</p>
@@ -354,14 +493,15 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <h2>2. Aceitação</h2>
 <p>O acesso e utilização deste website implica a aceitação integral destes Termos.</p>
 <h2>3. Objeto</h2>
-<p>Este website divulga informação editorial sobre saúde auditiva e facilita o agendamento de consultas auditivas gratuitas em parceria com o Centro Português Auditivo. A informação publicada tem carácter meramente informativo e não substitui aconselhamento médico especializado.</p>
+<p>Este website divulga informação editorial sobre saúde auditiva e facilita o agendamento de consultas auditivas gratuitas. A informação publicada tem carácter meramente informativo e não substitui aconselhamento médico especializado.</p>
 <h2>4. Consultas Gratuitas</h2>
 <p>As consultas auditivas são inteiramente gratuitas e sem compromisso de compra.</p>
 <h2>5. Propriedade Intelectual</h2>
-<p>Todo o conteúdo editorial é propriedade do Operador e está protegido pela legislação de direito de autor. É proibida a reprodução sem autorização prévia e escrita.</p>
+<p>Todo o conteúdo editorial é propriedade do Operador e está protegido pela legislação de direito de autor.</p>
 <h2>6. Lei Aplicável e Foro</h2>
 <p>Estes Termos são regidos pela lei portuguesa. É competente o tribunal da comarca de Castelo Branco. Para litígios de consumo: <strong>ec.europa.eu/consumers/odr</strong>.</p>
 </div></div></div>
+
 <footer><div class="footer-inner">
 <div>
 <p class="footer-name">Saúde <em style="font-style:italic;color:var(--accent)">Auditiva</em></p>
@@ -373,6 +513,7 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 <a href="mailto:geral@saudeauditiva.pt">Contacto</a>
 </div>
 </div></footer>
+
 <div class="overlay" id="bookingOverlay" onclick="if(event.target===this)closeBooking()"><div class="modal">
 <div class="modal-header"><div><h3>Marcar consulta auditiva gratuita</h3><p class="sub">Ligamos nós para confirmar a data e hora</p></div><span class="modal-close" onclick="closeBooking()">✕</span></div>
 <div class="modal-body"><div id="bookingFormWrap">
@@ -386,45 +527,78 @@ footer{border-top:3px solid var(--ink);padding:22px 24px 32px}
 </div>
 <div class="modal-ty" id="bookingTy"><div class="ty-check">✓</div><h3>Pedido recebido!</h3><p>A nossa equipa vai contactá-lo em breve.</p><button class="modal-ty-close" onclick="closeBooking()">Fechar</button></div>
 </div></div></div>
+
 <div class="overlay" id="quizOverlay" onclick="if(event.target===this)closeQuiz()"><div class="modal">
 <div class="modal-header"><div><h3>Teste rápido de audição</h3><p class="sub">5 perguntas · 2 minutos</p></div><span class="modal-close" onclick="closeQuiz()">✕</span></div>
 <div class="modal-body" id="quizBody"></div>
 </div></div>
+
 <script>
-var ARTICLES=[];
+var ARTICLES = [];
+var CAT_DATA = {
+  perda: {
+    label: 'Perda Auditiva', navId: 'nav-perda', jsonCat: 'Perda Auditiva',
+    kicker: 'Saúde Auditiva',
+    title: 'Perda Auditiva: causas, tipos e tratamentos',
+    intro: 'A perda auditiva afecta milhões de portugueses. Compreender as suas causas, reconhecer os tipos e conhecer as opções de tratamento é o primeiro passo para recuperar a qualidade de vida.',
+    editorial: '<h3>O que é a perda auditiva?</h3><p>A perda auditiva é uma redução da capacidade de ouvir sons, podendo ser parcial ou total, afetar um ou ambos os ouvidos. É uma das condições de saúde mais prevalentes em Portugal — estima-se que cerca de 20% da população adulta apresenta algum grau de perda auditiva, sendo que mais de um terço das pessoas com mais de 65 anos é afectado.</p><h3>Tipos de perda auditiva</h3><p>Existem três categorias principais:</p><ul><li><strong>Perda condutiva:</strong> o som não chega eficazmente ao ouvido interno. As causas mais comuns são rolhões de cera, otite média com derrame ou perfuração do tímpano. Frequentemente tratável com medicação ou cirurgia.</li><li><strong>Perda neurossensorial:</strong> causada por dano nas células ciliadas do ouvido interno ou no nervo auditivo. Geralmente permanente, mas muito bem compensada com aparelhos auditivos modernos.</li><li><strong>Perda mista:</strong> combinação dos dois tipos anteriores.</li></ul><h3>As causas mais comuns</h3><p>O envelhecimento (presbiacusia) é a causa mais frequente. A exposição prolongada a ruídos intensos é a segunda — e a mais prevenível. Determinados medicamentos ototóxicos, infecções graves e doenças sistémicas como diabetes e hipertensão também contribuem para a degradação auditiva.</p><blockquote>A maioria das pessoas espera em média 7 anos após os primeiros sintomas antes de procurar ajuda. Este atraso tem consequências: isolamento social, declínio cognitivo acelerado e maior risco de depressão.</blockquote><h3>Opções de tratamento</h3><p>Nos casos de perda neurossensorial — os mais comuns em adultos — os aparelhos auditivos são a solução mais eficaz. As tecnologias actuais são discretas, inteligentes e oferecem uma qualidade de som muito próxima da audição natural. Nos casos mais severos, os implantes cocleares podem ser uma opção.</p>'
+  },
+  sinais: {
+    label: 'Sinais de Alerta', navId: 'nav-sinais', jsonCat: 'Sinais de Alerta',
+    kicker: 'Saúde Auditiva',
+    title: 'Sinais de Alerta: quando a sua audição precisa de atenção',
+    intro: 'A perda auditiva instala-se de forma gradual e silenciosa. Conhecer os sinais precoces permite actuar a tempo — e evitar anos de isolamento e esforço desnecessário.',
+    editorial: '<h3>Por que é difícil reconhecer os sinais?</h3><p>O cérebro é extraordinariamente adaptável. Quando a audição começa a degradar-se, ele compensa: lê lábios sem ter consciência disso, preenche lacunas com contexto, pede para repetir com naturalidade. Esta capacidade adaptativa é útil no curto prazo — mas mascara o problema durante anos.</p><h3>Os sinais mais frequentes</h3><ul><li><strong>Dificuldade em ambientes ruidosos:</strong> consegue ouvir em silêncio, mas num restaurante ou reunião perde-se. Este é frequentemente o primeiro sinal.</li><li><strong>Volume da televisão:</strong> os familiares queixam-se que o volume está demasiado alto.</li><li><strong>Pedidos de repetição frequentes:</strong> especialmente quando o interlocutor está de costas ou noutra divisão.</li><li><strong>Dificuldade ao telefone:</strong> sem leitura labial de apoio, o esforço de compreensão aumenta muito.</li><li><strong>Zumbidos nos ouvidos (acufenos):</strong> sons persistentes — apitos, campainhas, sussurros — sem origem externa.</li><li><strong>Sensação de "ouvir mas não perceber":</strong> os sons chegam, mas as palavras parecem emboladas ou indistintas.</li></ul><blockquote>Se reconhece dois ou mais destes sinais no seu quotidiano, uma avaliação auditiva gratuita é o passo lógico — e não compromete a nada.</blockquote><h3>Quando agir?</h3><p>Quanto mais cedo for identificada e tratada, melhores os resultados. A perda auditiva não tratada está associada a declínio cognitivo acelerado, maior risco de depressão e isolamento social progressivo. Não espere sete anos — a avaliação auditiva é rápida, indolor e gratuita.</p>'
+  },
+  prevencao: {
+    label: 'Prevenção', navId: 'nav-prev', jsonCat: 'Prevenção',
+    kicker: 'Saúde Auditiva',
+    title: 'Prevenção Auditiva: como proteger a audição ao longo da vida',
+    intro: 'Muitos casos de perda auditiva são evitáveis. Hábitos simples, adoptados a tempo, podem preservar a saúde auditiva por décadas — e manter a qualidade de vida que merece.',
+    editorial: '<h3>O ruído: o maior inimigo da audição</h3><p>A exposição prolongada a sons acima de 85 decibéis causa dano progressivo e irreversível nas células ciliadas do ouvido interno. O problema é que o dano é indolor e acumula-se silenciosamente ao longo de anos — só se torna evidente quando já é tarde para o reverter.</p><p>Sons perigosos no quotidiano incluem: concertos e festivais de música (100–120 dB), cortadores de relva (90 dB), trânsito intenso (85 dB) e auscultadores com volume máximo (100–105 dB).</p><h3>Medidas práticas de protecção</h3><ul><li><strong>Regra 60/60:</strong> auscultadores no máximo 60% do volume, durante no máximo 60 minutos seguidos.</li><li><strong>Protecção auditiva:</strong> use tampões ou protectores auriculares em ambientes ruidosos — concertos, obras, maquinaria. Não é exagero, é higiene auditiva.</li><li><strong>Pausas de silêncio:</strong> após exposição a ruído intenso, o ouvido precisa de recuperar. Dê-lhe tempo.</li><li><strong>Medicamentos ototóxicos:</strong> alguns antibióticos, anti-inflamatórios e quimioterapêuticos podem danificar a audição. Fale com o seu médico sobre alternativas.</li></ul><blockquote>Controlar doenças como diabetes e hipertensão também protege a audição — ambas afectam a circulação sanguínea no ouvido interno.</blockquote><h3>Rastreios periódicos</h3><p>A partir dos 50 anos, uma avaliação auditiva anual é recomendada, mesmo na ausência de sintomas. A detecção precoce permite agir quando o tratamento é mais eficaz — e completamente gratuito através do serviço disponível neste website.</p>'
+  },
+  familia: {
+    label: 'Família', navId: 'nav-familia', jsonCat: 'Família',
+    kicker: 'Saúde Auditiva',
+    title: 'Família e Audição: como apoiar quem precisa de ajuda',
+    intro: 'É frequente que os familiares sejam os primeiros a notar a perda auditiva. Saber como abordar o assunto — com empatia e sem pressão — pode fazer toda a diferença na decisão de procurar ajuda.',
+    editorial: '<h3>Porque os familiares notam primeiro</h3><p>A pessoa com perda auditiva adapta-se gradualmente, muitas vezes sem se aperceber. É o cônjuge que deixa de conseguir ter uma conversa normal. É o filho que nota que o pai pede sempre para repetir. É a filha que percebe que a mãe se isola nos jantares de família. Os sinais são visíveis de fora muito antes de serem reconhecidos de dentro.</p><h3>Como abordar o assunto</h3><p>A forma como se fala sobre audição importa. Críticas ou comparações podem gerar resistência e vergonha. Em alternativa:</p><ul><li>Use observações concretas e neutras: "Reparei que nas conversas em família estás a ter dificuldades em acompanhar — já pensaste em fazer um rastreio?"</li><li>Evite infantilizar: a perda auditiva não afecta a inteligência nem a autonomia.</li><li>Ofereça-se para acompanhar: a presença de um familiar aumenta muito a probabilidade de adesão ao tratamento.</li><li>Partilhe informação: às vezes, um artigo ou vídeo sobre o tema é mais eficaz do que uma conversa directa.</li></ul><blockquote>A resistência em procurar ajuda é frequentemente emocional, não racional. Paciência e empatia são mais eficazes do que argumentos lógicos.</blockquote><h3>Após o diagnóstico</h3><p>Se o familiar decidiu usar aparelho auditivo, o apoio continua a ser fundamental. A adaptação demora semanas e pode ser frustrante. Celebrate os progressos, seja paciente com as dificuldades e mantenha um ambiente de comunicação que facilite — fale de frente, num tom claro, sem exagerar a articulação.</p>'
+  },
+  aparelhos: {
+    label: 'Aparelhos Auditivos', navId: 'nav-ap', jsonCat: 'Aparelhos',
+    kicker: 'Saúde Auditiva',
+    title: 'Aparelhos Auditivos: guia completo para decidir com confiança',
+    intro: 'Os aparelhos auditivos modernos são discretos, inteligentes e altamente eficazes. Conhecer as opções disponíveis — tipos, tecnologias e processo de adaptação — ajuda a tomar uma decisão informada.',
+    editorial: '<h3>O que mudou nos aparelhos auditivos modernos</h3><p>Os aparelhos auditivos actuais são irreconhecíveis face aos de há 20 anos. A miniaturização da electrónica permitiu criar dispositivos praticamente invisíveis, com bateria recarregável, conectividade Bluetooth (para ouvir música e chamadas directamente no aparelho) e processamento digital de som em tempo real que elimina ruídos de fundo e foca a voz dos interlocutores.</p><h3>Tipos de aparelhos auditivos</h3><ul><li><strong>BTE (retroauricular):</strong> fica atrás da orelha, ligado a um molde intracanal. Robusto e adequado para perdas severas.</li><li><strong>RIC/RITE:</strong> similar ao BTE mas com um fio fino e altifalante no canal auditivo. Muito popular pela discrição e qualidade de som.</li><li><strong>ITC (intracanal):</strong> encaixa parcialmente no canal auditivo. Menos visível que o BTE.</li><li><strong>CIC (completamente intracanal):</strong> praticamente invisível. Adequado para perdas ligeiras a moderadas.</li></ul><blockquote>Não existe um "melhor aparelho" universal — o mais adequado depende do grau de perda, da anatomia do canal auditivo, do estilo de vida e do orçamento disponível.</blockquote><h3>O processo de adaptação</h3><p>Adaptar-se a um aparelho auditivo demora geralmente entre 4 a 6 semanas. No início, sons que estavam silenciados há anos — o ruído dos passos, o tinido dos talheres — voltam a ser audíveis e podem ser sobrepotenciados. O cérebro precisa de tempo para reaprender a filtrar. A maioria dos utilizadores relata melhoria significativa na qualidade de vida, nas relações sociais e no bem-estar mental após a adaptação completa.</p><h3>A consulta de avaliação</h3><p>O primeiro passo é sempre uma avaliação auditiva por um especialista — audiologista ou médico otorrinolaringologista. Esta avaliação determina o grau e tipo de perda e indica quais os aparelhos mais adequados. A consulta de avaliação disponível através deste website é completamente gratuita e sem compromisso.</p>'
+  }
+};
+
 fetch('https://raw.githubusercontent.com/duartevassalo-byte/Saude-Auditiva/main/artigos.json?cb='+Date.now())
   .then(function(r){return r.json();})
-  .then(function(data){ARTICLES=data;renderRecent();renderCatSections();})
+  .then(function(data){ARTICLES=data;renderRecent();renderCatIndexArts();})
   .catch(function(e){console.log('Erro:',e);});
+
 function renderRecent(){
   if(!ARTICLES.length){document.getElementById('recentGrid').innerHTML='<p class="loading-msg">Em breve.</p>';return;}
-  var recent=ARTICLES.slice(0,4);
-  document.getElementById('recentGrid').innerHTML=recent.map(function(a){
+  document.getElementById('recentGrid').innerHTML=ARTICLES.slice(0,4).map(function(a){
     return '<div class="article-card" onclick="showArticle(''+a.id+'')">'+(a.img?'<img class="card-img" src="'+a.img+'" alt="">':'')+'<p class="card-kicker">'+a.cat+'</p><h3 class="card-headline">'+a.titulo+'</h3><p class="card-meta">Saúde Auditiva · '+fmtDate(a.data)+'</p><button class="card-read-btn">Ler artigo</button></div>';
   }).join('');
 }
-function renderCatSections(){
-  var cats=['Perda Auditiva','Sinais de Alerta','Prevenção','Família','Aparelhos'];
-  var out='';
-  cats.forEach(function(cat){
-    var arts=ARTICLES.filter(function(a){return a.cat===cat;});
-    if(!arts.length)return;
-    var cards=arts.slice(0,3).map(function(a){
-      var img=a.img?('<img class="cat-idx-img" src="'+a.img+'" alt="">'):'<div class="cat-idx-img"></div>';
-      return '<div class="cat-idx-card" data-aid="'+a.id+'">'+img+'<div><p class="cat-idx-kick">'+a.cat+'</p><p class="cat-idx-title">'+a.titulo+'</p><p class="cat-idx-meta">'+fmtDate(a.data)+'</p></div></div>';
+
+function renderCatIndexArts(){
+  var map = {perda:'Perda Auditiva',sinais:'Sinais de Alerta',prevencao:'Prevenção',familia:'Família',aparelhos:'Aparelhos'};
+  Object.keys(map).forEach(function(key){
+    var arts=ARTICLES.filter(function(a){return a.cat===map[key];}).slice(0,3);
+    var el=document.getElementById('cat-arts-'+key);
+    if(!el)return;
+    if(!arts.length){el.innerHTML='<p class="cat-idx-empty">Artigos em breve.</p>';return;}
+    el.innerHTML=arts.map(function(a){
+      return '<div class="cat-idx-card" data-aid="'+a.id+'">'+(a.img?'<img class="cat-idx-img" src="'+a.img+'" alt="">':'<div class="cat-idx-img"></div>')+'<div><p class="cat-idx-kick">'+a.cat+'</p><p class="cat-idx-title">'+a.titulo+'</p><p class="cat-idx-meta">'+fmtDate(a.data)+'</p></div></div>';
     }).join('');
-    var btn='<button class="cat-ver-mais" data-cat="'+cat+'">Ver todos →</button>';
-    out+='<div class="cat-index-section"><div class="cat-index-header"><h2>'+cat+'</h2>'+btn+'</div><div class="cat-index-grid">'+cards+'</div></div>';
-  });
-  var el=document.getElementById('cat-index-sections');
-  el.innerHTML=out;
-  el.addEventListener('click',function(e){
-    var card=e.target.closest('[data-aid]');
-    var btn=e.target.closest('[data-cat]');
-    if(card)showArticle(card.getAttribute('data-aid'));
-    else if(btn)showCat(btn.getAttribute('data-cat'));
+    el.addEventListener('click',function(e){var c=e.target.closest('[data-aid]');if(c)showArticle(c.getAttribute('data-aid'));});
   });
 }
+
 function showPage(n){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById('page-'+n).classList.add('active');
@@ -432,20 +606,26 @@ function showPage(n){
   var el=document.getElementById('nav-home');if(el)el.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function showCat(cat){
+
+function showCat(key){
+  var cd=CAT_DATA[key];if(!cd)return;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById('page-cat').classList.add('active');
   document.querySelectorAll('#mainNav a').forEach(function(a){a.classList.remove('active');});
-  var m={'Perda Auditiva':'nav-perda','Sinais de Alerta':'nav-sinais','Prevenção':'nav-prev','Família':'nav-familia','Aparelhos':'nav-ap'};
-  var el=document.getElementById(m[cat]);if(el)el.classList.add('active');
-  document.getElementById('catTitle').textContent=cat;
-  var arts=ARTICLES.filter(function(a){return a.cat===cat;});
-  document.getElementById('catCount').textContent=arts.length+' artigo'+(arts.length!==1?'s':'');
+  var el=document.getElementById(cd.navId);if(el)el.classList.add('active');
+  document.getElementById('catKicker').textContent=cd.kicker;
+  document.getElementById('catTitle').textContent=cd.title;
+  document.getElementById('catIntro').textContent=cd.intro;
+  document.getElementById('catEditorial').innerHTML=cd.editorial;
+  var arts=ARTICLES.filter(function(a){return a.cat===cd.jsonCat;});
+  var tEl=document.getElementById('catArtsTitle');
+  tEl.textContent=arts.length?'Artigos publicados ('+arts.length+')':'';
   document.getElementById('catList').innerHTML=arts.length?arts.map(function(a){
-    return '<div class="cat-article-row" onclick="showArticle(''+a.id+'')">'+'<img class="cat-art-img" src="'+(a.img||'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=60')+'" alt="">'+'<div><p class="cat-art-kicker">'+a.cat+'</p><p class="cat-art-title">'+a.titulo+'</p><p class="cat-art-deck">'+a.deck+'</p><p class="cat-art-meta">'+fmtDate(a.data)+(a.hora?' · '+a.hora:'')+'</p></div></div>';
-  }).join(''):'<p class="loading-msg">Ainda não há artigos nesta categoria. Em breve!</p>';
+    return '<div class="cat-art-row" onclick="showArticle(''+a.id+'')">'+(a.img?'<img class="car-img" src="'+a.img+'" alt="">':'<div class="car-img"></div>')+'<div><p class="car-kick">'+a.cat+'</p><p class="car-title">'+a.titulo+'</p><p class="car-deck">'+a.deck+'</p><p class="car-meta">'+fmtDate(a.data)+(a.hora?' · '+a.hora:'')+'</p></div></div>';
+  }).join(''):'';
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function showArticle(id){
   var a=ARTICLES.find(function(x){return x.id==id;});if(!a)return;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
@@ -465,6 +645,7 @@ function showArticle(id){
   }).join('');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function submitInline(){var n=document.getElementById('inlNome').value.trim();var t=document.getElementById('inlTel').value.trim();if(!n||!t)return;document.getElementById('inlTy').style.display='block';}
 function fmtDate(s){if(!s)return '';var d=new Date(s+'T12:00:00');return d.toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'});}
 function openBooking(){document.getElementById('bookingOverlay').classList.add('open');}
@@ -472,6 +653,7 @@ function closeBooking(){document.getElementById('bookingOverlay').classList.remo
 function submitBooking(){var n=document.getElementById('bookNome').value.trim();var t=document.getElementById('bookTel').value.trim();if(!n||!t)return;document.getElementById('bookingFormWrap').style.display='none';document.getElementById('bookingTy').style.display='block';}
 document.getElementById('sidebarForm').addEventListener('submit',function(e){e.preventDefault();var n=document.getElementById('sbNome').value.trim();var t=document.getElementById('sbTel').value.trim();if(!n||!t)return;e.target.style.display='none';document.getElementById('sbTy').style.display='block';});
 document.getElementById('asideForm').addEventListener('submit',function(e){e.preventDefault();e.target.style.display='none';document.getElementById('asideTy').style.display='block';});
+document.getElementById('asideForm2').addEventListener('submit',function(e){e.preventDefault();e.target.style.display='none';document.getElementById('asideTy2').style.display='block';});
 var QS=[
 {q:'Com que frequência pede a alguém que repita o que disse?',o:['Raramente ou nunca','Às vezes, em ambientes ruidosos','Frequentemente, mesmo em silêncio','Quase sempre']},
 {q:'Tem dificuldade em perceber conversas ao telefone?',o:['Não, sem dificuldade','Às vezes','Frequentemente','Evito falar ao telefone']},
