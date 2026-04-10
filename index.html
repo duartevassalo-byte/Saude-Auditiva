@@ -1228,6 +1228,7 @@ function submitInline(idx) {
   const n=document.getElementById('inN'+idx)?.value.trim();
   const t=document.getElementById('inT'+idx)?.value.trim();
   if(!n||!t) return;
+  sendLead(n,t,'Artigo - CTA Inline');
   document.getElementById('inRow'+idx).style.display='none';
   document.getElementById('inTy'+idx).style.display='block';
 }
@@ -1260,7 +1261,7 @@ function renderArticlesGrid() {
 
 function openBooking() { document.getElementById('bookingOverlay').classList.add('open'); }
 function closeBooking() { document.getElementById('bookingOverlay').classList.remove('open'); document.getElementById('bookingFormWrap').style.display=''; document.getElementById('bookingTy').style.display='none'; }
-function submitBooking() { const n=document.getElementById('bookNome').value.trim(); const t=document.getElementById('bookTel').value.trim(); if(!n||!t) return; document.getElementById('bookingFormWrap').style.display='none'; document.getElementById('bookingTy').style.display='block'; }
+function submitBooking() { const n=document.getElementById('bookNome').value.trim(); const t=document.getElementById('bookTel').value.trim(); if(!n||!t) return; sendLead(n,t,'Modal Consulta Gratuita'); document.getElementById('bookingFormWrap').style.display='none'; document.getElementById('bookingTy').style.display='block'; }
 
 const QS=[
   {q:'Com que frequência pede a alguém que repita o que disse?',opts:['Raramente ou nunca','Às vezes, em ambientes ruidosos','Frequentemente, mesmo em silêncio','Quase sempre'],w:[0,1,2,3]},
@@ -1314,7 +1315,7 @@ function showQResult(){
     <p style="font-size:0.66rem;color:var(--ink-faint);margin-top:8px;text-align:center">🔒 Dados confidenciais · Usados exclusivamente para a consulta</p>
   </div>`;
 }
-function submitQuiz(){const n=document.getElementById('qN').value.trim();const t=document.getElementById('qT').value.trim();if(!n||!t)return;['qN','qT'].forEach(id=>document.getElementById(id).style.display='none');document.querySelector('#quizBody button').style.display='none';document.getElementById('qTy').style.display='block';}
+function submitQuiz(){const n=document.getElementById('qN').value.trim();const t=document.getElementById('qT').value.trim();if(!n||!t)return;sendLead(n,t,'Quiz - Resultado');['qN','qT'].forEach(id=>document.getElementById(id).style.display='none');document.querySelector('#quizBody button').style.display='none';document.getElementById('qTy').style.display='block';}
 
 // ── PROGRESS BAR ─────────────────────────────────────────────
 window.addEventListener('scroll', ()=>{
@@ -1353,8 +1354,8 @@ function updateCalc() {
 document.addEventListener('DOMContentLoaded', ()=>{ if(document.getElementById('sliderAnos')) updateCalc(); });
 setTimeout(updateCalc, 500);
 
-document.getElementById('sidebarForm').addEventListener('submit',e=>{e.preventDefault();const n=document.getElementById('sbNome').value.trim();const t=document.getElementById('sbTel').value.trim();if(!n||!t)return;e.target.style.display='none';document.getElementById('sbTy').style.display='block';});
-document.getElementById('asideForm').addEventListener('submit',e=>{e.preventDefault();e.target.style.display='none';document.getElementById('asideTy').style.display='block';});
+document.getElementById('sidebarForm').addEventListener('submit',e=>{e.preventDefault();const n=document.getElementById('sbNome').value.trim();const t=document.getElementById('sbTel').value.trim();if(!n||!t)return;sendLead(n,t,'Sidebar - Marcar Consulta');e.target.style.display='none';document.getElementById('sbTy').style.display='block';});
+document.getElementById('asideForm').addEventListener('submit',e=>{e.preventDefault();const _n=document.getElementById('asideNome')?.value.trim()||'';const _t=document.getElementById('asideTel')?.value.trim()||'';sendLead(_n,_t,'Artigo - Sidebar CTA');e.target.style.display='none';document.getElementById('asideTy').style.display='block';});
 
 // ── DATE INIT ────────────────────────────────────────────────
 const d=new Date();
@@ -1490,6 +1491,7 @@ function submitInlineJ(id) {
   const n=document.getElementById('inNJ'+id)?.value.trim();
   const t=document.getElementById('inTJ'+id)?.value.trim();
   if(!n||!t) return;
+  sendLead(n,t,'Artigo - CTA Inline JSON');
   document.getElementById('inRowJ'+id).style.display='none';
   document.getElementById('inTyJ'+id).style.display='block';
 }
@@ -1658,6 +1660,16 @@ function submitExit(){
 })();
 setTimeout(()=>{const t=document.getElementById('whatsappTooltip');if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}},3000);
 
+
+async function sendLead(nome,tel,origem){
+  try{
+    await fetch('https://formspree.io/f/comercial@callcenter24h.pt',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({nome,telefone:tel,origem,pagina:'saudeauditiva.pt',data_hora:new Date().toLocaleString('pt-PT',{timeZone:'Europe/Lisbon'})})
+    });
+  }catch(e){}
+}
 </script>
 
 <!-- COOKIE BANNER -->
