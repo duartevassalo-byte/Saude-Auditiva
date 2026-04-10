@@ -1443,7 +1443,7 @@ function openJsonArticle(id) {
     </div>
     <p class="article-deck">${art.deck}</p>
     ${art.img ? `<img src="${art.img}" style="width:100%;max-height:360px;object-fit:cover;border-radius:4px;margin:1.5rem 0;" alt="">` : ''}
-    <div class="article-content">${first}${cta}${second}</div>`;
+    <div class="article-content">${first}${cta}${second}</div>${buildMaisArtigos(id,true)}`;
   document.getElementById('relatedList').innerHTML = JSON_ARTICLES.filter(a=>a.id!==id).slice(0,4).map(a=>`
     <div class="related-item" onclick="openJsonArticle('${a.id}')">
       <p class="related-item-cat">${a.cat}</p>
