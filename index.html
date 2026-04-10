@@ -1443,7 +1443,8 @@ function openJsonArticle(id) {
     </div>
     <p class="article-deck">${art.deck}</p>
     ${art.img ? `<img src="${art.img}" style="width:100%;max-height:360px;object-fit:cover;border-radius:4px;margin:1.5rem 0;" alt="">` : ''}
-    <div class="article-content">${first}${cta}${second}</div>${buildMaisArtigos(id,true)}`;
+    <div class="article-content">${first}${cta}${second}</div>
+    ${buildMaisArtigos(id, true)}`;
   document.getElementById('relatedList').innerHTML = JSON_ARTICLES.filter(a=>a.id!==id).slice(0,4).map(a=>`
     <div class="related-item" onclick="openJsonArticle('${a.id}')">
       <p class="related-item-cat">${a.cat}</p>
@@ -1568,17 +1569,19 @@ window.addEventListener('popstate', handleHash);
 
 // ── MAIS ARTIGOS ─────────────────────────────────────────────
 function buildMaisArtigos(excludeId, isJson) {
+  // Combine static + JSON articles, exclude current
   let pool = [];
   ARTICLES.forEach(a => {
     if (!isJson && a.id == excludeId) return;
-    pool.push({ cat: a.cat, headline: a.headline, deck: a.deck||'', img: a.img||'', onclick: `showArticle(${a.id})` });
+    pool.push({ cat: a.cat, headline: a.headline, deck: a.deck, img: a.img || '', onclick: `showArticle(${a.id})` });
   });
   if (window.JSON_ARTICLES) {
     JSON_ARTICLES.forEach(a => {
       if (isJson && a.id === excludeId) return;
-      pool.push({ cat: a.cat, headline: a.titulo||a.headline||'', deck: a.deck||'', img: a.img||'', onclick: `openJsonArticle('${a.id}')` });
+      pool.push({ cat: a.cat, headline: a.titulo || a.headline || '', deck: a.deck || '', img: a.img || '', onclick: `openJsonArticle('${a.id}')` });
     });
   }
+  // Shuffle and take 3
   pool = pool.sort(() => Math.random() - 0.5).slice(0, 3);
   if (!pool.length) return '';
   return `<div class="mais-artigos">
@@ -1586,11 +1589,11 @@ function buildMaisArtigos(excludeId, isJson) {
     <div class="mais-artigos-grid">
       ${pool.map(a => `
         <div class="mais-artigos-card" onclick="${a.onclick}">
-          ${a.img ? `<img class="mais-artigos-img" src="${a.img}" loading="lazy" alt="">` : '<div class="mais-artigos-img-placeholder"></div>'}
+          ${a.img ? `<img class="mais-artigos-img" src="${a.img}" loading="lazy" alt="${a.headline}">` : '<div class="mais-artigos-img-placeholder"></div>'}
           <div class="mais-artigos-body">
             <p class="mais-artigos-cat">${a.cat}</p>
             <p class="mais-artigos-headline">${a.headline}</p>
-            <p class="mais-artigos-deck">${(a.deck||'').substring(0,80)}${(a.deck||'').length > 80 ? '…' : ''}</p>
+            <p class="mais-artigos-deck">${a.deck?.substring(0,80)}${a.deck?.length > 80 ? '…' : ''}</p>
           </div>
         </div>`).join('')}
     </div>
