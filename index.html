@@ -22,7 +22,7 @@
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&q=80">
 <!-- Schema.org structured data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Saúde Auditiva","description":"Portal de informação independente sobre saúde auditiva em Portugal","url":"https://saudeauditiva.pt","publisher":{"@type":"Organization","name":"Penguin Style Lda","url":"https://saudeauditiva.pt"},"about":{"@type":"MedicalCondition","name":"Perda Auditiva"},"inLanguage":"pt-PT"}
+{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Saúde Auditiva","description":"Portal de informação independente sobre saúde auditiva em Portugal","url":"https://saudeauditiva.pt","publisher":{"@type":"Organization","name":"Saúde Auditiva","url":"https://saudeauditiva.pt"},"about":{"@type":"MedicalCondition","name":"Perda Auditiva"},"inLanguage":"pt-PT"}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -386,13 +386,44 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
 .mais-artigos-deck { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
 @media(max-width:700px){ .mais-artigos-grid{ grid-template-columns: 1fr 1fr; } }
 @media(max-width:480px){ .mais-artigos-grid{ grid-template-columns: 1fr; } }
+
+/* ── WHATSAPP BUTTON ── */
+#whatsappBtn{position:fixed;bottom:24px;right:24px;z-index:300;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.5);cursor:pointer;transition:transform 0.2s;text-decoration:none}
+#whatsappBtn:hover{transform:scale(1.1)}
+#whatsappBtn svg{width:32px;height:32px;fill:white}
+#whatsappTooltip{position:fixed;bottom:94px;right:18px;background:var(--ink);color:white;font-size:.78rem;font-weight:600;padding:8px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:299}
+#whatsappTooltip.show{opacity:1}
+/* ── EXIT INTENT ── */
+#exitOverlay.open{display:flex}
+#exitModal{background:var(--paper);max-width:480px;width:100%;border-radius:6px;overflow:hidden;animation:slideUp 0.3s ease}
+.exit-header{background:var(--accent);color:white;padding:26px 28px 20px;text-align:center}
+.exit-header .exit-icon{font-size:2.4rem;margin-bottom:8px}
+.exit-header h2{font-family:var(--serif);font-size:1.35rem;line-height:1.25;margin-bottom:6px}
+.exit-header p{font-size:.85rem;opacity:.82;line-height:1.5}
+.exit-body{padding:22px 28px 26px}
+.exit-bullets{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:7px}
+.exit-bullets li{font-size:.85rem;color:var(--ink-mid);display:flex;align-items:center;gap:8px}
+.exit-bullets li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.exit-form{display:flex;flex-direction:column;gap:8px}
+.exit-form input{border:1.5px solid var(--rule);border-radius:3px;padding:10px 13px;font-family:var(--sans);font-size:.88rem;outline:none}
+.exit-form input:focus{border-color:var(--accent)}
+.exit-form button{background:var(--accent);color:white;border:none;border-radius:3px;padding:13px;font-family:var(--sans);font-size:.9rem;font-weight:700;cursor:pointer}
+.exit-dismiss{text-align:center;margin-top:10px;font-size:.76rem;color:var(--ink-faint);cursor:pointer;text-decoration:underline}
+.exit-ty{display:none;text-align:center;padding:10px 0 4px;color:var(--accent);font-weight:700;font-size:.9rem}
+/* ── SOCIAL PROOF ── */
+.social-proof-bar{background:var(--accent-light);border:1px solid rgba(26,92,58,0.2);border-radius:3px;padding:9px 14px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--accent);font-weight:600}
+.sp-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+/* ── URGENCY ── */
+.urgency-bar{background:#fff7ed;border:1px solid #fed7aa;border-radius:3px;padding:9px 13px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:#92400e}
+.urgency-slots{height:5px;background:var(--rule-light);border-radius:3px;margin-top:4px;overflow:hidden}
+.urgency-fill{height:100%;background:#f97316;border-radius:3px;width:35%}
 </style>
 </head>
 <body>
 <div id="readProgress"></div>
 
 <div class="phone-bar">
-  📞 Prefere ligar? <a href="tel:+351800200XXX">800 200 XXX</a> &nbsp;·&nbsp; Gratuito · Seg–Sex 9h–18h
+  📞 Prefere ligar? <a href="tel:+351210303361">210 303 361</a> &nbsp;·&nbsp; Gratuito · Seg–Sex 9h–18h
 </div>
 <div class="trust-strip">
   <span class="trust-item"><span class="ti">✅</span> Centros certificados em Portugal</span>
@@ -459,7 +490,7 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
       <aside class="lead-sidebar">
         <p class="sidebar-title">Marque a sua consulta</p>
         <div class="cta-card">
-          <p class="cta-label">Serviço gratuito</p>
+          <div class="social-proof-bar"><span class="sp-dot"></span><span id="spCounter">4 pessoas</span> a marcar consulta agora</div><div class="urgency-bar"><span>⏰</span><div><strong>Disponibilidade limitada esta semana</strong><div class="urgency-slots"><div class="urgency-fill"></div></div></div></div><p class="cta-label">Serviço gratuito</p>
           <span class="free-badge">✓ Sem custos</span>
           <h3>Consulta auditiva gratuita e sem compromisso</h3>
           <p>Deixe o seu contacto e ligamos nós para marcar na data que preferir.</p>
@@ -681,7 +712,7 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
     <div>
       <p class="footer-name">Saúde <em style="font-style:italic;color:var(--accent)">Auditiva</em></p>
       <p class="footer-sub">Portal de informação independente sobre saúde auditiva em Portugal. Conteúdo informativo, não substitui aconselhamento médico.</p>
-      <p style="font-size:0.7rem;color:var(--ink-faint);margin-top:8px;">© <span id="footerYear"></span> Penguin Style Lda · NIPC 515167657</p>
+      <p style="font-size:0.7rem;color:var(--ink-faint);margin-top:8px;">© <span id="footerYear"></span> Saúde Auditiva</p>
     </div>
     <div class="footer-links">
       <a onclick="showStaticPage('privacidade')">Política de Privacidade</a>
@@ -700,7 +731,7 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
       <p class="page-date">Última actualização: Abril de 2026</p>
       <div class="highlight-box"><p>A sua privacidade é importante para nós. Esta política explica de forma clara como recolhemos, utilizamos e protegemos os seus dados pessoais.</p></div>
       <h2>1. Responsável pelo tratamento</h2>
-      <p>Penguin Style Lda, com sede em Portugal, NIPC 515167657, é a entidade responsável pelo tratamento dos dados pessoais recolhidos através do website saudeauditiva.pt e dos seus formulários de contacto.</p>
+      <p>Saúde Auditiva, com sede em Portugal, , é a entidade responsável pelo tratamento dos dados pessoais recolhidos através do website saudeauditiva.pt e dos seus formulários de contacto.</p>
       <p>Para questões relacionadas com a privacidade, pode contactar-nos através de: <strong>privacidade@saudeauditiva.pt</strong></p>
       <h2>2. Dados que recolhemos</h2>
       <p>Recolhemos apenas os dados estritamente necessários para prestar os nossos serviços:</p>
@@ -751,7 +782,7 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
       <p class="page-date">Última actualização: Abril de 2026</p>
       <div class="highlight-box"><p>Ao utilizar o website saudeauditiva.pt, aceita os presentes termos. Leia-os com atenção antes de utilizar o serviço.</p></div>
       <h2>1. Identificação do operador</h2>
-      <p>O website saudeauditiva.pt é operado pela <strong>Penguin Style Lda</strong>, sociedade por quotas constituída de acordo com a lei portuguesa, com sede em Lisboa, Portugal, NIPC 515167657.</p>
+      <p>O website saudeauditiva.pt é operado pela <strong>Saúde Auditiva</strong>, sociedade por quotas constituída de acordo com a lei portuguesa, com sede em Lisboa, Portugal, .</p>
       <h2>2. Natureza do serviço</h2>
       <p>O saudeauditiva.pt é um portal de informação editorial sobre saúde auditiva, destinado ao público em geral em Portugal. O conteúdo publicado tem finalidade informativa e educacional.</p>
       <p><strong>Importante:</strong> O conteúdo deste website não substitui, em nenhuma circunstância, o aconselhamento médico ou audiológico profissional. Para diagnóstico e tratamento, consulte sempre um profissional de saúde qualificado.</p>
@@ -764,10 +795,10 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
         <li>A disponibilidade está sujeita à capacidade dos centros auditivos parceiros</li>
       </ul>
       <h2>4. Propriedade intelectual</h2>
-      <p>Todo o conteúdo editorial, design, código-fonte e materiais visuais publicados no saudeauditiva.pt são propriedade da Penguin Style Lda ou licenciados à mesma pelos respectivos autores.</p>
-      <p>É expressamente proibida a reprodução, distribuição ou utilização comercial de qualquer conteúdo sem autorização prévia e escrita da Penguin Style Lda. A partilha de links para artigos é encorajada.</p>
+      <p>Todo o conteúdo editorial, design, código-fonte e materiais visuais publicados no saudeauditiva.pt são propriedade da Saúde Auditiva ou licenciados à mesma pelos respectivos autores.</p>
+      <p>É expressamente proibida a reprodução, distribuição ou utilização comercial de qualquer conteúdo sem autorização prévia e escrita da Saúde Auditiva. A partilha de links para artigos é encorajada.</p>
       <h2>5. Limitação de responsabilidade</h2>
-      <p>A Penguin Style Lda não é responsável por:</p>
+      <p>A Saúde Auditiva não é responsável por:</p>
       <ul>
         <li>Decisões clínicas, de saúde ou pessoais tomadas com base no conteúdo deste website</li>
         <li>Erros ou imprecisões no conteúdo, embora nos esforcemos por manter a informação actualizada e precisa</li>
@@ -775,12 +806,12 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
         <li>Conteúdo de websites de terceiros para os quais este website possa conter links</li>
       </ul>
       <h2>6. Alterações ao serviço</h2>
-      <p>A Penguin Style Lda reserva-se o direito de alterar, suspender ou descontinuar qualquer funcionalidade do website sem aviso prévio, e de actualizar estes termos quando necessário.</p>
+      <p>A Saúde Auditiva reserva-se o direito de alterar, suspender ou descontinuar qualquer funcionalidade do website sem aviso prévio, e de actualizar estes termos quando necessário.</p>
       <h2>7. Lei aplicável e foro</h2>
       <p>Estes termos são regidos pela lei portuguesa. Para resolução de litígios, é competente o tribunal da comarca de Lisboa, salvo disposição legal em contrário aplicável aos consumidores.</p>
       <h2>8. Contacto</h2>
       <p>Para questões relativas a estes termos: <strong>geral@saudeauditiva.pt</strong><br>
-      Penguin Style Lda · NIPC 515167657 · Lisboa, Portugal</p>
+      Saúde Auditiva · Lisboa, Portugal</p>
     </div>
   </div>
 </div>
@@ -856,13 +887,13 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
         </div>
       </div>
       <h2>Quem somos</h2>
-      <p>O Saúde Auditiva é uma iniciativa da <strong>Penguin Style Lda</strong> (NIPC 515167657), uma empresa portuguesa de media digital fundada em Lisboa. Trabalhamos com jornalistas especializados em saúde, audioprotesistas e otorrinolaringologistas para garantir que o conteúdo publicado é rigoroso, actualizado e clinicamente relevante.</p>
+      <p>O Saúde Auditiva é uma iniciativa da <strong>Saúde Auditiva</strong> (), uma empresa portuguesa de media digital fundada em Lisboa. Trabalhamos com jornalistas especializados em saúde, audioprotesistas e otorrinolaringologistas para garantir que o conteúdo publicado é rigoroso, actualizado e clinicamente relevante.</p>
       <h2>A consulta gratuita</h2>
       <p>Em parceria com centros auditivos certificados em todo o país, oferecemos a possibilidade de marcar uma consulta de avaliação auditiva gratuita. Esta consulta é prestada por profissionais qualificados, sem qualquer obrigação de compra. O nosso objectivo é reduzir as barreiras ao diagnóstico precoce — não vender aparelhos.</p>
       <h2>Transparência e correcções</h2>
       <p>Comprometemo-nos a corrigir prontamente qualquer erro factual identificado no nosso conteúdo. Se encontrar uma imprecisão, por favor contacte-nos em <strong>editorial@saudeauditiva.pt</strong>.</p>
       <h2>Contacto</h2>
-      <p>Penguin Style Lda · NIPC 515167657<br>
+      <p>Saúde Auditiva<br>
       Lisboa, Portugal<br>
       geral@saudeauditiva.pt</p>
       <div style="margin-top:36px;text-align:center;">
@@ -1599,6 +1630,33 @@ function buildMaisArtigos(excludeId, isJson) {
     </div>
   </div>`;
 }
+
+
+let __exitShown=false,__exitEnabled=false;
+setTimeout(()=>{__exitEnabled=true;},20000);
+document.addEventListener('mouseleave',e=>{
+  if(e.clientY<=0&&__exitEnabled&&!__exitShown&&!sessionStorage.getItem('exitShown')){
+    __exitShown=true;sessionStorage.setItem('exitShown','1');
+    document.getElementById('exitOverlay').classList.add('open');
+  }
+});
+function closeExitIntent(){document.getElementById('exitOverlay').classList.remove('open');}
+function submitExit(){
+  const n=document.getElementById('exitNome').value.trim();
+  const t=document.getElementById('exitTel').value.trim();
+  if(!n||!t)return;
+  document.getElementById('exitForm').style.display='none';
+  document.getElementById('exitTy').style.display='block';
+  document.querySelector('.exit-dismiss').style.display='none';
+  setTimeout(closeExitIntent,3000);
+}
+(function(){
+  const c=[2,3,3,4,4,4,5,5,3,4];
+  let i=Math.floor(Math.random()*c.length);
+  function upd(){const n=c[i%c.length];i++;const el=document.getElementById('spCounter');if(el)el.textContent=n+(n===1?' pessoa':' pessoas');}
+  upd();setInterval(upd,45000+Math.random()*45000);
+})();
+setTimeout(()=>{const t=document.getElementById('whatsappTooltip');if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}},3000);
 
 </script>
 
