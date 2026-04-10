@@ -370,6 +370,22 @@ footer { border-top: 3px solid var(--ink); padding: 22px 24px 32px; }
 
 /* ── PROGRESS BAR ── */
 #readProgress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 200; width: 0%; transition: width 0.1s; pointer-events: none; }
+
+/* ── MAIS ARTIGOS (fim de artigo) ── */
+.mais-artigos { margin-top: 40px; padding-top: 28px; border-top: 2px solid var(--ink); }
+.mais-artigos-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 18px; }
+.mais-artigos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mais-artigos-card { cursor: pointer; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; transition: border-color 0.15s; }
+.mais-artigos-card:hover { border-color: var(--accent); }
+.mais-artigos-card:hover .mais-artigos-headline { color: var(--accent); }
+.mais-artigos-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.mais-artigos-img-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--paper-dark); }
+.mais-artigos-body { padding: 12px 14px 14px; }
+.mais-artigos-cat { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.mais-artigos-headline { font-family: var(--serif); font-size: 0.9rem; font-weight: 700; line-height: 1.3; color: var(--ink); transition: color 0.15s; margin-bottom: 4px; }
+.mais-artigos-deck { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
+@media(max-width:700px){ .mais-artigos-grid{ grid-template-columns: 1fr 1fr; } }
+@media(max-width:480px){ .mais-artigos-grid{ grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1195,7 +1211,7 @@ function renderArticlePage(idx) {
   const first  = cut>-1 ? art.body.substring(0,cut+4) : art.body;
   const second = cut>-1 ? art.body.substring(cut+4) : '';
   const cta = `<div class="article-inline-cta"><span class="free-badge" style="margin-bottom:10px;display:inline-block">&#10003; Gratuito</span><h4>Quer saber o estado da sua audição?</h4><p>Marque agora uma consulta auditiva gratuita. Ligamos nós para confirmar.</p><div class="inline-row" id="inRow${idx}"><input type="text" id="inN${idx}" placeholder="O seu nome"><input type="tel" id="inT${idx}" placeholder="Telemóvel"><button onclick="submitInline(${idx})">Marcar &#8594;</button></div><div class="inline-cta-ty" id="inTy${idx}">&#10003; Recebido! Entraremos em contacto brevemente.</div><p class="inline-cta-priv">&#128274; Dados confidenciais</p></div>`;
-  document.getElementById('articleMain').innerHTML = `<div class="article-breadcrumb"><span onclick="showPage('home')">Início</span><span class="sep">›</span><span onclick="showCat('${art.catSlug}')">${art.cat}</span><span class="sep">›</span><span style="color:var(--ink-mid)">${art.headline.substring(0,42)}…</span></div><div class="article-kicker-line">${art.cat}</div><h1 class="article-title">${art.headline}</h1><div class="article-byline"><span style="font-weight:700;color:var(--accent)">Saúde Auditiva</span><span style="color:var(--rule)">·</span><span class="byline-updated">Última atualização: hoje às ${hh}:${mm}</span><span style="color:var(--rule)">·</span><span>${art.readTime} de leitura</span></div><p class="article-deck">${art.deck}</p><div class="article-content">${first}${cta}${second}</div>`;
+  document.getElementById('articleMain').innerHTML = `<div class="article-breadcrumb"><span onclick="showPage('home')">Início</span><span class="sep">›</span><span onclick="showCat('${art.catSlug}')">${art.cat}</span><span class="sep">›</span><span style="color:var(--ink-mid)">${art.headline.substring(0,42)}…</span></div><div class="article-kicker-line">${art.cat}</div><h1 class="article-title">${art.headline}</h1><div class="article-byline"><span style="font-weight:700;color:var(--accent)">Saúde Auditiva</span><span style="color:var(--rule)">·</span><span class="byline-updated">Última atualização: hoje às ${hh}:${mm}</span><span style="color:var(--rule)">·</span><span>${art.readTime} de leitura</span></div><p class="article-deck">${art.deck}</p><div class="article-content">${first}${cta}${second}</div>${buildMaisArtigos(idx, false)}`;
   document.getElementById('relatedList').innerHTML = ARTICLES.filter((_,i)=>i!==idx).map(a=>`<div class="related-item" onclick="showArticle(${a.id})"><p class="related-item-cat">${a.cat}</p><p class="related-item-title">${a.headline}</p></div>`).join('');
 }
 
@@ -1548,6 +1564,38 @@ loadArtigosJSON().then(()=>{
 }).catch(()=>{ renderArticlesGrid(); });
 
 window.addEventListener('popstate', handleHash);
+
+
+// ── MAIS ARTIGOS ─────────────────────────────────────────────
+function buildMaisArtigos(excludeId, isJson) {
+  let pool = [];
+  ARTICLES.forEach(a => {
+    if (!isJson && a.id == excludeId) return;
+    pool.push({ cat: a.cat, headline: a.headline, deck: a.deck||'', img: a.img||'', onclick: `showArticle(${a.id})` });
+  });
+  if (window.JSON_ARTICLES) {
+    JSON_ARTICLES.forEach(a => {
+      if (isJson && a.id === excludeId) return;
+      pool.push({ cat: a.cat, headline: a.titulo||a.headline||'', deck: a.deck||'', img: a.img||'', onclick: `openJsonArticle('${a.id}')` });
+    });
+  }
+  pool = pool.sort(() => Math.random() - 0.5).slice(0, 3);
+  if (!pool.length) return '';
+  return `<div class="mais-artigos">
+    <p class="mais-artigos-title">Continue a ler</p>
+    <div class="mais-artigos-grid">
+      ${pool.map(a => `
+        <div class="mais-artigos-card" onclick="${a.onclick}">
+          ${a.img ? `<img class="mais-artigos-img" src="${a.img}" loading="lazy" alt="">` : '<div class="mais-artigos-img-placeholder"></div>'}
+          <div class="mais-artigos-body">
+            <p class="mais-artigos-cat">${a.cat}</p>
+            <p class="mais-artigos-headline">${a.headline}</p>
+            <p class="mais-artigos-deck">${(a.deck||'').substring(0,80)}${(a.deck||'').length > 80 ? '…' : ''}</p>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
 
 </script>
 
